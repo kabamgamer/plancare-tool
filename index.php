@@ -4,7 +4,6 @@
     <!-- Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="30">
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -20,86 +19,71 @@
 
 <body>
     <div class="container">
-<!--        New customer -->
+        <!-- New customer -->
         <div class="row">
-            <div class="col-md-3 col-sm-3">
-                <h2>Nieuwe klant</h2>
+            <div class="col-md-8 col-sm-8">
+                <h2>Nieuwe PlanCare service</h2>
             </div>
-            <div class="col-md-5 col-sm-5"></div>
-            <div class="col-md-4 col-sm-4">
-                <form>
-                    <div class="form-group">
-                        <input type="text" placeholder="Naam">
-                        <input type="submit" value="Aanmaken">
-                    </div>
-                </form>
+            <div class="col-md-4 col-sm-4 align-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Toevoegen</button>
             </div>
         </div>
 
         <hr>
 
-        <h2>Alle klanten</h2>
+        <!-- Search -->
+        <div class="row">
+            <div class="col-md-9 col-sm-9">
+                <h2>Alle PlanCare services</h2>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="form-group">
+                    <input type="text" placeholder="Search" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <!-- Services -->
         <table class="table table-center">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Naam</th>
+                    <th>Service</th>
+                    <th>Project</th>
+                    <th>Type</th>
+                    <th>Klant</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Customer -->
                 <tr>
-                    <td>1</td>
-                    <td>Een klant</td>
-                    <td>
-                        <a href="#demo1" data-toggle="collapse">Services</a>
-                    </td>
+                    <td>Id</td>
+                    <td>Service</td>
+                    <td>Project</td>
+                    <td>Type</td>
+                    <td>Klant</td>
+                    <td><a href="#" class="next">&#8250;</a></td>
                 </tr>
-                <!-- PlanCare services -->
-                <tr id="demo1" class="collapse">
-                    <td colspan="3">
-                        PlanCare service 1<br>
-                        PlanCare service 2<br>
-                        PlanCare service 3
-                    </td>
-                </tr>
-
-                <!-- Customer -->
                 <tr>
-                    <td>2</td>
-                    <td>Een tweede klant</td>
-                    <td>
-                        <a href="#demo2" data-toggle="collapse">Services</a>
-                    </td>
+                    <td>Id</td>
+                    <td>Service</td>
+                    <td>Project</td>
+                    <td>Type</td>
+                    <td>Klant</td>
+                    <td><a href="#" class="next">&#8250;</a></td>
                 </tr>
-                <!-- PlanCare services -->
-                <tr id="demo2" class="collapse">
-                    <td colspan="3">
-                        PlanCare service 1<br>
-                        PlanCare service 2<br>
-                        PlanCare service 3
-                    </td>
-                </tr>
-
-                <!-- Customer -->
                 <tr>
-                    <td>3</td>
-                    <td>Een derde klant</td>
-                    <td>
-                        <a href="#demo3" data-toggle="collapse">Services</a>
-                    </td>
-                </tr>
-                <!-- PlanCare services -->
-                <tr id="demo3" class="collapse">
-                    <td colspan="3">
-                        PlanCare service 1<br>
-                        PlanCare service 2<br>
-                        PlanCare service 3
-                    </td>
+                    <td>Id</td>
+                    <td>Service</td>
+                    <td>Project</td>
+                    <td>Type</td>
+                    <td>Klant</td>
+                    <td><a href="#" class="next">&#8250;</a></td>
                 </tr>
             </tbody>
         </table>
+
+        <?php include "includes/modal.inc.php"; ?>
     </div>
 </body>
 </html>
