@@ -1,3 +1,4 @@
 FROM php:7.0-apache
-
-RUN index.php
+COPY . /
+# RUN index.php
+EXPOSE 0
