@@ -5,6 +5,7 @@
 </head>
 
 <body>
-    <h1 class="text-center">Hello World</h1>
+    <h1 class="text-center">Hello World</h1><br>
+    <a href="contact.html">Contact</a>
 </body>
 </html>
