@@ -2,7 +2,7 @@
 function CallAPI($method, $url, $data = false)
 {
     $curl = curl_init();
-    $token = "207.658313.1523985054.3778732819b6f3e4130eaa1b060523594fd7912bcd2504a2af84801eaff147c7";
+    $token = "207.658313.1524018106.f99500eba69e6b048b9bb9fc2bd9f0e1764c458e251288a4816a6ebfeafaa629";
 
     switch ($method)
     {
