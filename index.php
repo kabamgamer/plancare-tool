@@ -1,3 +1,7 @@
+<?php
+include "includes/functions/callAPI.php";
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,31 +59,25 @@
                     <th></th>
                 </tr>
             </thead>
+
+            <!-- All services -->
             <tbody>
-                <tr>
-                    <td>Id</td>
-                    <td>Service</td>
-                    <td>Project</td>
-                    <td>Type</td>
-                    <td>Klant</td>
-                    <td><a href="#" class="next">&#8250;</a></td>
-                </tr>
-                <tr>
-                    <td>Id</td>
-                    <td>Service</td>
-                    <td>Project</td>
-                    <td>Type</td>
-                    <td>Klant</td>
-                    <td><a href="#" class="next">&#8250;</a></td>
-                </tr>
-                <tr>
-                    <td>Id</td>
-                    <td>Service</td>
-                    <td>Project</td>
-                    <td>Type</td>
-                    <td>Klant</td>
-                    <td><a href="#" class="next">&#8250;</a></td>
-                </tr>
+                <?php
+                    $result = CallAPI("GET", "https://api2.tapster.nl/v1/customers");
+
+                    foreach($result as $service){
+                        echo "
+                    <tr>
+                        <td>".$service['id']."</td>
+                        <td>".$service['googleAnalyticsId']."</td>
+                        <td>".$service['href']."</td>
+                        <td>".$service['class']."</td>                            
+                        <td>".$service['class']."</td>                            
+                        <td><a href=\"properties.php?serviceId=".$service['id']."  \" class=\"next\">&#8250;</a></td>                            
+                    </tr>";
+                    }
+
+                ?>
             </tbody>
         </table>
 

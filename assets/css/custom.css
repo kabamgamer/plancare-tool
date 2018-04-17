@@ -28,3 +28,12 @@ hr{
     cursor: pointer;
     color: black;
 }
+
+.version{
+    width: 500px;
+}
+
+.refresh{
+    max-width: 40px !important;
+    cursor: pointer;
+}
