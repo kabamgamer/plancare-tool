@@ -1,4 +1,5 @@
 <?php
+include "includes/sessions.php";
 include "includes/functions/callAPI.php";
 ?>
 
@@ -63,8 +64,10 @@ include "includes/functions/callAPI.php";
             <!-- All services -->
             <tbody>
                 <?php
+                    // Get services form API
                     $result = CallAPI("GET", "https://api2.tapster.nl/v1/customers");
 
+                    // Place services in table
                     foreach($result as $service){
                         echo "
                     <tr>

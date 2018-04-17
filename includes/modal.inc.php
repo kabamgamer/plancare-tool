@@ -8,15 +8,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post">
+            <form method="post" action="/classes/validators/submits.php">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Naam</label>
-                        <input class="form-control" type="text" name="name" placeholder="Naam">
+                        <input class="form-control" type="text" name="name" value="<?= (isset($_GET['name']) ? $_GET['name'] : '') ?>" placeholder="Naam">
                     </div>
                     <div class="form-group">
                         <label for="customer">Klant</label>
-                        <input class="form-control" type="text" name="customer" placeholder="Klant">
+                        <input class="form-control" type="text" name="customer" value="<?= (isset($_GET['customer']) ? $_GET['customer'] : '') ?>" placeholder="Klant">
                     </div>
                     <div class="form-group">
                         <label for="type">Type</label>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Toevoegen">
+                    <input type="submit" class="btn btn-primary" name="submit" value="Toevoegen">
                 </div>
             </form>
         </div>

@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e9454da-2baa-4e50-9414-514d6f5b9c75" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/assets/css/custom.css" afterPath="$PROJECT_DIR$/assets/css/custom.css" />
+      <change beforePath="$PROJECT_DIR$/includes/modal.inc.php" afterPath="$PROJECT_DIR$/includes/modal.inc.php" />
       <change beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,19 +14,60 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="76" column="27" lean-forward="true" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="27" />
+            <state relative-caret-position="21">
+              <caret line="1" column="26" lean-forward="true" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="26" />
               <folding>
-                <marker date="1523967838882" expanded="true" signature="73:122" ph="..." />
-                <marker date="1523967838882" expanded="true" signature="80:122" ph="..." />
-                <marker date="1523967838882" expanded="true" signature="2184:2587" ph="..." />
-                <marker date="1523967838882" expanded="true" signature="2184:2609" ph="..." />
-                <marker date="1523967838882" expanded="true" signature="2184:2695" ph="..." />
-                <marker date="1523967838882" expanded="true" signature="2626:2633" ph="..." />
+                <marker date="1523972935886" expanded="true" signature="106:155" ph="..." />
+                <marker date="1523972935886" expanded="true" signature="113:155" ph="..." />
+                <marker date="1523972935886" expanded="true" signature="2309:2339" ph="..." />
+                <marker date="1523972935886" expanded="true" signature="2309:2712" ph="..." />
+                <marker date="1523972935886" expanded="true" signature="2309:2734" ph="..." />
+                <marker date="1523972935886" expanded="true" signature="2309:2820" ph="..." />
+                <marker date="1523972935886" expanded="true" signature="2751:2758" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modal.inc.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/includes/modal.inc.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="20" column="44" lean-forward="true" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="submits.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/classes/validators/submits.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="validator.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/classes/validators/validator.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sessions.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/includes/sessions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -43,21 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="readme.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/readme.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="11" column="133" lean-forward="true" selection-start-line="11" selection-start-column="133" selection-end-line="11" selection-end-column="133" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="callAPI.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/includes/functions/callAPI.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="28" column="42" lean-forward="true" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+            <state relative-caret-position="693">
+              <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -84,14 +113,19 @@
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/assets/js/bootstrap.min.js" />
         <option value="$PROJECT_DIR$/includes/head.inc.php" />
-        <option value="$PROJECT_DIR$/includes/modal.inc.php" />
         <option value="$PROJECT_DIR$/assets/css/custom.css" />
         <option value="$PROJECT_DIR$/classes/CallAPI/CallAPI.php" />
         <option value="$PROJECT_DIR$/classes/request/CallAPI.php" />
         <option value="$PROJECT_DIR$/includes/functions/callAPI.php" />
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/properties.php" />
         <option value="$PROJECT_DIR$/readme.txt" />
+        <option value="$PROJECT_DIR$/classes/validators/errorHandles.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/includes/sessions.php" />
+        <option value="$PROJECT_DIR$/classes/validators/validator.php" />
+        <option value="$PROJECT_DIR$/classes/validators/errorHandler.php" />
+        <option value="$PROJECT_DIR$/includes/modal.inc.php" />
+        <option value="$PROJECT_DIR$/classes/validators/submits.php" />
       </list>
     </option>
   </component>
@@ -138,7 +172,13 @@
             <path>
               <item name="plancare-tool" type="b2602c69:ProjectViewProjectNode" />
               <item name="plancare-tool" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="includes" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="classes" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="plancare-tool" type="b2602c69:ProjectViewProjectNode" />
+              <item name="plancare-tool" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="classes" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="validators" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -178,12 +218,12 @@
       <updated>1523535173235</updated>
       <workItem from="1523535174511" duration="2019000" />
       <workItem from="1523858198400" duration="23118000" />
-      <workItem from="1523948427548" duration="11131000" />
+      <workItem from="1523948427548" duration="18632000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36268000" />
+    <option name="totallyTimeSpent" value="43769000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -225,12 +265,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1523967838882" expanded="true" signature="73:122" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="80:122" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2184:2587" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2184:2609" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2184:2695" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2626:2633" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="106:155" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="113:155" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2339" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2712" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2734" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2820" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2751:2758" ph="..." />
           </folding>
         </state>
       </provider>
@@ -256,12 +297,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1523967838882" expanded="true" signature="73:122" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="80:122" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2184:2587" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2184:2609" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2184:2695" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2626:2633" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="106:155" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="113:155" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2339" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2712" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2734" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2820" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2751:2758" ph="..." />
           </folding>
         </state>
       </provider>
@@ -284,14 +326,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/bootstrap.min.js" />
     <entry file="file://$PROJECT_DIR$/includes/head.inc.php" />
-    <entry file="file://$PROJECT_DIR$/includes/modal.inc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -319,10 +353,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/includes/functions/callAPI.php">
+    <entry file="file://$PROJECT_DIR$/properties.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="28" column="42" lean-forward="true" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+        <state relative-caret-position="357">
+          <caret line="53" column="40" lean-forward="true" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -335,26 +369,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/properties.php">
+    <entry file="file://$PROJECT_DIR$/includes/functions/callAPI.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="53" column="40" lean-forward="true" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
+        <state relative-caret-position="693">
+          <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="76" column="27" lean-forward="true" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="27" />
+        <state relative-caret-position="21">
+          <caret line="1" column="26" lean-forward="true" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="26" />
           <folding>
-            <marker date="1523967838882" expanded="true" signature="73:122" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="80:122" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2184:2587" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2184:2609" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2184:2695" ph="..." />
-            <marker date="1523967838882" expanded="true" signature="2626:2633" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="106:155" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="113:155" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2339" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2712" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2734" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2309:2820" ph="..." />
+            <marker date="1523972935886" expanded="true" signature="2751:2758" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/sessions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/modal.inc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="20" column="44" lean-forward="true" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/validators/submits.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/validators/validator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
