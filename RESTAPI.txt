@@ -1,0 +1,12 @@
+*****************************
+* PlanCare services ophalen *
+*****************************
+# Headers
+bearer $token
+
+# Request
+GET https://api2.tapster.nl/v1/plancareServices
+
+
+# Link shows up like this. accessToken as variable.
+https://demo.tapcare.nl/?accessToken=92.235959.1523995172.0d1a3bd82295170c62a69b645fa1c9914139e06309e76114250f11f1f83458fe&isPublic=0
