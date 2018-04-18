@@ -44,6 +44,7 @@ include "includes/functions/callAPI.php";
             <div class="col-md-3 col-sm-3">
                 <div class="form-group">
                     <input type="text" placeholder="Search" class="form-control">
+                    
                 </div>
             </div>
         </div>
