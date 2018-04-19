@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="/classes/validators/submits.php">
+            <form method="post" action="\classes\validators\submits.php">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Naam</label>

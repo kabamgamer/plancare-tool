@@ -5,6 +5,7 @@
 bearer $token
 
 # Request
+POST https://api2.tapster.nl/v1/api/createAuthToken
 GET https://api2.tapster.nl/v1/plancareServices
 
 

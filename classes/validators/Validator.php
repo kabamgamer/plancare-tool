@@ -1,9 +1,10 @@
 <?php
-//namespace Validator;
 
-class validator
+namespace validators;
+
+class Validator
 {
-    public function service($name, $customer)
+    public static function service($name, $customer)
     {
         session_start();
 
@@ -40,9 +41,7 @@ class validator
                                 header("Location: /index.php?name=$name&customer=$customer");
                                 exit();
                             } else{
-                                $_SESSION["success"] = "PlanCare service is succesvol aangemaakt";
-                                header("Location: /index.php");
-                                exit();
+                                return true;
                             }
                         }
                     }

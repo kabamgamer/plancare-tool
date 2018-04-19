@@ -1,6 +1,8 @@
 <?php
-include "includes/sessions.php";
-include "includes/functions/callAPI.php";
+include "includes/sessions.inc.php";
+include "autoload.php";
+
+use API\CallAPI;
 ?>
 
 <!DOCTYPE html>
@@ -13,11 +15,6 @@ include "includes/functions/callAPI.php";
     <!-- Styles -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
-
-    <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
     <title>Home</title>
 </head>
@@ -66,10 +63,11 @@ include "includes/functions/callAPI.php";
             <tbody>
                 <?php
                     // Get services form API
-                    $result = CallAPI("GET", "https://api2.tapster.nl/v1/customers");
+                    $result = new CallAPI;
+                    $results = $result->getServices();
 
                     // Place services in table
-                    foreach($result as $service){
+                    foreach($results as $service){
                         echo "
                     <tr>
                         <td>".$service['id']."</td>
@@ -88,4 +86,11 @@ include "includes/functions/callAPI.php";
         <?php include "includes/modal.inc.php"; ?>
     </div>
 </body>
+
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="assets/js/custum.js"></script>
+
 </html>

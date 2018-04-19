@@ -1,5 +1,7 @@
 <?php
-include "includes/functions/callAPI.php";
+include "autoload.php";
+
+use \API\CallAPI;
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +33,8 @@ include "includes/functions/callAPI.php";
 
     <?php
         $serviceId = $_GET["serviceId"];
-        $result = CallAPI("GET", "https://api2.tapster.nl/v1/customers/$serviceId");
+        $result = new CallAPI;
+        $result = $result->getServices($serviceId);
     ?>
 
     <!-- Form -->
