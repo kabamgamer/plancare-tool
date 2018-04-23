@@ -8,11 +8,11 @@ require "../../autoload.php";
 
 if(isset($_POST["submit"])) {
 
-    $name = $_POST["name"];
+    $serviceName = $_POST["serviceName"];
     $customer = $_POST["customer"];
     $type = $_POST["type"];
 
-    if(Validator::service($name, $customer) === true){
+    if(Validator::service($serviceName, $customer) === true){
         header("Location: \index.php");
         $_SESSION["success"] = "Het project is succesvol aangemaakt!";
     }

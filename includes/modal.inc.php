@@ -8,29 +8,29 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="\classes\validators\submits.php">
+            <form method="post" id="addService" name="addService" action="\classes\validators\submits.php">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">Naam</label>
-                        <input class="form-control" type="text" name="name" value="<?= (isset($_GET['name']) ? $_GET['name'] : '') ?>" placeholder="Naam">
-                    </div>
-                    <div class="form-group">
                         <label for="customer">Klant</label>
-                        <input class="form-control" type="text" name="customer" value="<?= (isset($_GET['customer']) ? $_GET['customer'] : '') ?>" placeholder="Klant">
+                        <input class="form-control" type="text" name="customer" id="customer" value="<?= (isset($_GET['customer']) ? $_GET['customer'] : '') ?>" placeholder="Klant">
                     </div>
                     <div class="form-group">
                         <label for="type">Type</label>
-                        <select class="form-control" name="type">
+                        <select class="form-control" name="type" id="type">
                             <option class="form-control" value="test">Test</option>
                             <option class="form-control" value="productie">Productie</option>
                             <option class="form-control" value="opleiding">Opleiding</option>
                             <option class="form-control" value="acceptatie">Acceptatie</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="name">Service naam</label>
+                        <input class="form-control" type="text" minlength="2" name="serviceName" id="serviceName" value="<?= (isset($_GET['serviceName']) ? $_GET['serviceName'] : '') ?>" placeholder="Naam">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" name="submit" value="Toevoegen">
+                    <input type="submit" id="submit-button" class="btn btn-primary" name="submit" value="Toevoegen">
                 </div>
             </form>
         </div>
