@@ -56,19 +56,19 @@ use \API\CallAPI;
             <form>
                 <div class="form-group">
                     <label for="url">API Url</label>
-                    <input type="text" value="<?= $result['id'] ?>" class="form-control" name="url">
+                    <input type="text" value="<?= $result['href'] ?>" class="form-control" name="url">
                 </div>
                 <div class="form-group">
                     <label for="key">API Key</label>
-                    <input type="text" value="<?= $result['href'] ?>" class="form-control" name="key">
+                    <input type="text" value="<?= $result['id'] ?>" class="form-control" name="key">
                 </div>
                 <div class="form-group">
                     <label for="username">API Gebruikersnaam</label>
-                    <input type="text" value="<?= $result['class'] ?>" class="form-control" name="username">
+                    <input type="text" value="<?= $result['name'] ?>" class="form-control" name="username">
                 </div>
                 <div class="form-group">
                     <label for="password">API Wachtwoord</label>
-                    <input type="text" value="<?= $result['googleAnalyticsId'] ?>" class="form-control" name="password">
+                    <input type="text" value="<?= $result['class'] ?>" class="form-control" name="password">
                 </div>
 
                 <input type="submit" name="submit" class="btn btn-primary" value="Opslaan">

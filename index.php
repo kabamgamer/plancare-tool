@@ -52,9 +52,11 @@ use API\CallAPI;
         <tr>
             <th>Id</th>
             <th>Service</th>
-            <th>Project</th>
-            <th>Type</th>
-            <th>Klant</th>
+            <th>URL</th>
+            <th>Class</th>
+<!--            <th>Project</th>-->
+<!--            <th>Type</th>-->
+<!--            <th>Klant</th>-->
             <th></th>
         </tr>
         </thead>
@@ -71,9 +73,8 @@ use API\CallAPI;
             echo "
                   <tr>
                       <td>".$service['id']."</td>
-                      <td>".$service['googleAnalyticsId']."</td>
+                      <td>".$service['name']."</td>
                       <td>".$service['href']."</td>
-                      <td>".$service['class']."</td>                            
                       <td>".$service['class']."</td>                            
                       <td><a href=\"properties.php?serviceId=".$service['id']."  \" class=\"next\">&#8250;</a></td>                            
                   </tr>";

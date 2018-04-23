@@ -4,14 +4,14 @@ namespace API;
 
 class CallAPI
 {
-    const URI = 'https://api2.tapster.nl/v1';
+    const URI = 'https://api-acc2.tapster.nl/v1';
 
     /**
      * Get headers
      */
     private function headers()
     {
-        $token = "207.658313.1524494327.005ac97d42822f18017ca371d39e9c2868183b26bee1cb863362a6db8bc16862";
+        $token = "207.658313.1524523147.e9daf0eb26783298bb633e1c06d50b83b7aa1b24c3904cc68bac30474f4ac961";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -72,14 +72,9 @@ class CallAPI
     /**
      * Method for retrieving PlanCare services
      */
-    public function getServices($ext = null)
+    public function getServices($id = null)
     {
-        if (isset($ext)) {
-            return $this->apiCall("GET", "/customers/$ext");
-        }
-        else {
-            return $this->apiCall("GET", "/customers");
-        }
+        return $this->apiCall("GET", "/plancareServices/$id");
     }
 
     /**
