@@ -47,9 +47,9 @@ $(function() {
 });
 
 jQuery.validator.addMethod("customerChars", function (value, element) {
-    return this.optional(element) || /^[a-zA-z0-9 ]*$/.test(value);
+    return this.optional(element) || /^[a-zA-Z0-9 ]*$/.test(value);
 }, "Dit veld mag alleen hoofdletters, kleine letters, cijfers en spaties bevatten.");
 
 jQuery.validator.addMethod("serviceNameChars", function (value, element) {
-    return this.optional(element) || /^[a-zA-z0-9 \/\\]*$/.test(value);
-}, "Dit veld mag alleen hoofdletters, kleine letters, cijfers, slashes en spaties bevatten.");
+    return this.optional(element) || /^[a-zA-Z0-9,\/ ]*$/.test(value);
+}, "Dit veld mag alleen hoofdletters, kleine letters, cijfers, komma, voorwaardse slash en spaties bevatten.");

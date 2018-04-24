@@ -11,7 +11,7 @@ class CallAPI
      */
     private function headers()
     {
-        $token = "207.658313.1524523147.e9daf0eb26783298bb633e1c06d50b83b7aa1b24c3904cc68bac30474f4ac961";
+        $token = "207.658313.1524581947.5e8906667f7230ccf24b13fa0b64bae3222e70c5abb9abe2c28fd9fded1ebd5c";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -52,7 +52,7 @@ class CallAPI
             default:
                 if ($data)
                     $url = sprintf("%s?%s", $url, http_build_query($data));
-        } //$method
+        }
 
         // Send headers
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);

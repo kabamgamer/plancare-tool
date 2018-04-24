@@ -76,7 +76,7 @@ use API\CallAPI;
                       <td>".$service['name']."</td>
                       <td>".$service['href']."</td>
                       <td>".$service['class']."</td>                            
-                      <td><a href=\"properties.php?serviceId=".$service['id']."  \" class=\"next\">&#8250;</a></td>                            
+                      <td><a href=\"properties.php?serviceId=".$service['id']."  \"><button class='next-btn'><span>Eigenschappen </span></button></a></td>                            
                   </tr>";
         }
 

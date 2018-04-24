@@ -26,13 +26,13 @@ class Validator
                 } else {
 
                     // Check for char paterns
-                    if(!preg_match("/^[a-zA-z0-9 \/\\\]*$/", $serviceName)){
+                    if(!preg_match("/^[a-zA-Z0-9 \/,]*$/", $serviceName)){
                         $_SESSION["error"] = "Het veld \"Service naam\" mag alleen hoofdletters, kleine letters, slashes en spaties bevatten.";
                         header("Location: /index.php?customer=$customer&serviceName=$serviceName");
                         exit();
                     } else {
-                        if(!preg_match("/^[a-zA-z0-9 ]*$/", $customer)){
-                            $_SESSION["error"] = "Het veld \"Klant\" mag alleen hoofdletters, kleine letters en spaties bevatten.";
+                        if(!preg_match("/^[a-zA-Z0-9 ]*$/", $customer)){
+                            $_SESSION["error"] = "Het veld \"Klant\" mag alleen hoofdletters, kleine letters, cijfers, komma, voorwaardse slash en spaties bevatten.";
                             header("Location: /index.php?customer=$customer&serviceName=$serviceName");
                             exit();
                         } else{

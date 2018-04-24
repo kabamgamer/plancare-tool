@@ -26,6 +26,7 @@ use \API\CallAPI;
 </head>
 
 <body>
+<a href="index.php"><button class="btn btn-back">❮ Terug</button></a>
 <div class="container">
     <h2>Eigenschappen</h2>
 
