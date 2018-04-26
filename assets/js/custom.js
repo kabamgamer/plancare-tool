@@ -38,7 +38,7 @@ $(function() {
     // Autocomplete
     $("#serviceName").focus(function () {
         var customer = $("#customer").val();
-        var type = $("#type").val();
+        var type = $("#type").val().substring(0, 4).toUpperCase();
 
         if(customer && type && !this.value) {
             this.value = customer + "/" + type;

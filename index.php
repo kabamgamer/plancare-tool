@@ -17,16 +17,8 @@ use API\CallAPI;
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
 
-    <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.validate.js"></script>
-    <script src="assets/js/custom.js"></script>
 
-
-    <title>Home</title>
+    <title>PlanCare Implemmentatietool - Home</title>
 </head>
 
 <body>
@@ -52,11 +44,8 @@ use API\CallAPI;
         <tr>
             <th>Id</th>
             <th>Service</th>
-            <th>URL</th>
-            <th>Class</th>
-<!--            <th>Project</th>-->
-<!--            <th>Type</th>-->
-<!--            <th>Klant</th>-->
+            <th>Project</th>
+            <th>Versie</th>
             <th></th>
         </tr>
         </thead>
@@ -70,12 +59,15 @@ use API\CallAPI;
 
         // Place services in table
         foreach($results as $service){
+            $serviceName = explode("/", $service['name']);
+            $serviceName = $serviceName[1]."/".$serviceName[4];
+
             echo "
                   <tr>
                       <td>".$service['id']."</td>
-                      <td>".$service['name']."</td>
-                      <td>".$service['href']."</td>
-                      <td>".$service['class']."</td>                            
+                      <td>".$serviceName."</td>
+                      <td>".$service['project']."</td>
+                      <td>".$service['plancare_version']."</td>                            
                       <td><a href=\"properties.php?serviceId=".$service['id']."  \"><button class='next-btn'><span>Eigenschappen </span></button></a></td>                            
                   </tr>";
         }
@@ -83,8 +75,17 @@ use API\CallAPI;
         ?>
         </tbody>
     </table>
-    <?php include "includes/modal.inc.php"; ?>
+    <?php include "includes/modal.inc.php";?>
 
 </div>
 </body>
+
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.validate.js"></script>
+<script src="assets/js/custom.js"></script>
+
 </html>

@@ -4,20 +4,50 @@ namespace API;
 
 class CallAPI
 {
-    const URI = 'https://api-acc2.tapster.nl/v1';
+    const URI = 'https://api-dev2.tapster.nl/v1';
 
     /**
      * Get headers
      */
-    private function headers()
+    private function headers($curl)
     {
-        $token = "207.658313.1524581947.5e8906667f7230ccf24b13fa0b64bae3222e70c5abb9abe2c28fd9fded1ebd5c";
+        $token = "207.658313.1524754598.88713f5373c10bc17f445c9c61c7d78dcc8970a94e936160c6ad208d50273e37";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
         $headers[] = "Authorization: bearer $token";
 
-        return $headers;
+        // Send headers
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    }
+
+    /**
+     * Check method
+     */
+    private function method($curl, $method, $url, $data)
+    {
+        // Check method
+        switch ($method) {
+            case "POST":
+                curl_setopt($curl, CURLOPT_POST, TRUE);
+
+                if ($data)
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+
+                break;
+
+            case "PUT":
+                curl_setopt($curl, CURLOPT_PUT, TRUE);
+                break;
+
+            case "GET":
+                curl_setopt($curl, CURLOPT_HTTPGET, TRUE);
+                break;
+
+            default:
+                if ($data)
+                    $url = sprintf("%s?%s", $url, http_build_query($data));
+        }
     }
 
     /**
@@ -33,35 +63,18 @@ class CallAPI
 
         $curl = curl_init();
 
-        $headers = $this->headers();
+        // Add headers
+        $this->headers($curl);
 
         // Check method
-        switch ($method) {
-            case "POST":
-                curl_setopt($curl, CURLOPT_POST, 1);
+        $this->method($curl, $method, $url, $data);
 
-                if ($data)
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                break;
-            case "PUT":
-                curl_setopt($curl, CURLOPT_PUT, 1);
-                break;
-            case "GET":
-                curl_setopt($curl, CURLOPT_HTTPGET, TRUE);
-                break;
-            default:
-                if ($data)
-                    $url = sprintf("%s?%s", $url, http_build_query($data));
-        }
-
-        // Send headers
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-
+        // Set URL and other appropriate options
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
 
         // Decode json to array
-        $result = json_decode(curl_exec($curl), true);
+        $result = json_decode(curl_exec($curl), TRUE);
 
         curl_close($curl);
 
@@ -74,15 +87,15 @@ class CallAPI
      */
     public function getServices($id = null)
     {
-        return $this->apiCall("GET", "/plancareServices/$id");
+        return $this->apiCall("GET", "/plancareServices/$id?offset=160&limit=25");
     }
 
     /**
      * Method for posting new service
      */
-    public function postService()
+    public function postService($data)
     {
-        return $this->apiCall("POST", "/plancareServices", "");
+        return $this->apiCall("POST", "/plancareServices", $data);
     }
 
     /**
