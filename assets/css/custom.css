@@ -1,5 +1,5 @@
 body{
-    padding: 10px 0;
+    padding-bottom: 10px;
 }
 
 h2{
@@ -7,11 +7,16 @@ h2{
 }
 
 hr{
-    margin: 35px 0px;
+    margin: 35px 0;
 }
 
 .align-right{
     text-align: right;
+}
+
+/* nav */
+nav{
+    margin-bottom: 20px;
 }
 
 /* Buttons */
@@ -85,11 +90,14 @@ hr{
     border: 1px solid #4e66ff !important;
 }
 
-/* Error styles */
+/* Error & Validation styles */
 form .error {
     color: #ff0000;
     border-color: #ff0000 !important;
 }
 form .error:focus{
     box-shadow: 0 0 0 0.2rem rgba(255,0,0,.25) !important;
+}
+.wait *{
+    cursor: wait !important;
 }

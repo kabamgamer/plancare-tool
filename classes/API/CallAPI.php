@@ -11,7 +11,7 @@ class CallAPI
      */
     private function headers($curl)
     {
-        $token = "207.658313.1524754598.88713f5373c10bc17f445c9c61c7d78dcc8970a94e936160c6ad208d50273e37";
+        $token = "207.658313.1525128146.2ffb1697a1ff6d26423707fe9c46c8ad5eb1a7e1874b2ee1ea735e14fa6d0ea2";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -32,12 +32,13 @@ class CallAPI
                 curl_setopt($curl, CURLOPT_POST, TRUE);
 
                 if ($data)
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
 
                 break;
 
             case "PUT":
-                curl_setopt($curl, CURLOPT_PUT, TRUE);
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
                 break;
 
             case "GET":
@@ -83,11 +84,19 @@ class CallAPI
 
 
     /**
+     * Get customers
+     */
+    public function getCustomers($id = null)
+    {
+        return $this->apiCall("GET", "/customers/$id?limit=10");
+    }
+
+    /**
      * Method for retrieving PlanCare services
      */
     public function getServices($id = null)
     {
-        return $this->apiCall("GET", "/plancareServices/$id?offset=160&limit=25");
+        return $this->apiCall("GET", "/plancareServices/$id?limit=20");
     }
 
     /**
@@ -103,9 +112,9 @@ class CallAPI
      *
      * @param int $serviceId
      */
-    public function updateProperty($serviceId)
+    public function updateProperty($serviceId, $data)
     {
-        return $this->apiCall("PUT", "/plancareServices/$serviceId", "");
+        return $this->apiCall("PUT", "/plancareServices/$serviceId", $data);
     }
 
 

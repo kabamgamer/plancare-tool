@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "autoload.php";
 
 use \API\CallAPI;
@@ -19,7 +20,11 @@ use \API\CallAPI;
 </head>
 
 <body>
-<a href="index.php"><button class="btn btn-back">❮ Terug</button></a>
+<?php
+    include "includes/nav.inc.php";
+    include "includes/sessions.inc.php";
+?>
+<button class="btn btn-back" onclick="window.history.back()">❮ Terug</button>
 <div class="container">
     <h2>Eigenschappen</h2>
 
@@ -47,14 +52,15 @@ use \API\CallAPI;
 
             <hr>
 
-            <form method="post" action="">
+            <form method="post" id="putService" name="putService" action="\classes\validators\submits.php">
+                <input type="hidden" name="serviceId" value="<?= $serviceId ?>">
                 <div class="form-group">
                     <label for="url">API Url</label>
-                    <input type="text" value="<?= $result['rest_service_address'] ?>" class="form-control" name="url">
+                    <input type="text" value="<?= $result['rest_service_address'] ?>" class="form-control" name="rest_service_address">
                 </div>
                 <div class="form-group">
                     <label for="key">API Key</label>
-                    <input type="text" value="<?= $result['rest_api_key'] ?>" class="form-control" name="key">
+                    <input type="text" value="<?= $result['rest_api_key'] ?>" class="form-control" name="rest_api_key">
                 </div>
                 <div class="form-group">
                     <label for="username">API Gebruikersnaam</label>
@@ -65,7 +71,7 @@ use \API\CallAPI;
                     <input type="text" value="<?= $result['password'] ?>" class="form-control" name="password">
                 </div>
 
-                <input type="submit" name="submit" class="btn btn-primary" value="Opslaan">
+                <input type="submit" name="submitServicePut" class="btn btn-primary" value="Opslaan">
             </form>
         </div>
     </div>
@@ -73,9 +79,12 @@ use \API\CallAPI;
 </body>
 
 <!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.validate.js"></script>
+<script src="assets/js/custom.js"></script>
 <!-- Font Awesome -->
 <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
 

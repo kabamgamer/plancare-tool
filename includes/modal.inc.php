@@ -8,7 +8,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" id="addService" name="addService" action="\classes\validators\submits.php">
+            <form method="POST" id="addService" name="addService" action="\classes\validators\submits.php">
+                <input type="hidden" name="customerId" value="<?= $_GET["customerId"] ?>">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="customer">Klant</label>

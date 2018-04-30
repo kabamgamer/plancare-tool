@@ -10,10 +10,6 @@ $(document).ready( function () {
 $(function() {
     $("#addService").validate({
         rules: {
-            customer: {
-                required: true,
-                customerChars: true
-            },
             serviceName: {
                 required: true,
                 serviceNameChars: true
@@ -21,16 +17,20 @@ $(function() {
         },
 
         messages: {
-            customer: {
-                required: "Dit veld is verplicht",
-                customerChars: "Dit veld mag alleen hoofdletters, kleine letters, cijfers en spaties bevatten."
-            },
             serviceName: {
                 required: "Dit veld is verplicht",
                 serviceNameChars: "Dit veld mag alleen hoofdletters, kleine letters, cijfers, slashes en spaties bevatten."
             }
         },
         submitHandler: function(form) {
+            var button = document.getElementById("submit-button");
+            var body = document.getElementsByTagName("BODY")[0];
+            var i;
+
+            button.setAttribute("disabled", "disabled");
+            button.style.cursor = "progress";
+            body.classList.add("wait");
+
             form.submit();
         }
     });

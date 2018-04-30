@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 if(isset($_SESSION["error"])){
     echo "<div class='alert alert-danger container' id='hide'>" . $_SESSION['error'] . "</div>";

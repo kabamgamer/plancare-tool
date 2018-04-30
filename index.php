@@ -1,5 +1,5 @@
 <?php
-include "includes/sessions.inc.php";
+session_start();
 include "autoload.php";
 
 use API\CallAPI;
@@ -22,19 +22,31 @@ use API\CallAPI;
 </head>
 
 <body>
+<?php
+    include "includes/nav.inc.php";
+    include "includes/sessions.inc.php";
+?>
+
+
 <div class="container">
 
     <!-- New customer -->
+    <?php if(isset($_GET["customerId"]) && !empty(($_GET["customerId"]))){ ?>
+
     <div class="row">
         <div class="col-md-8 col-sm-8">
             <h2>Nieuwe PlanCare service</h2>
         </div>
         <div class="col-md-4 col-sm-4 align-right">
+
+
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Toevoegen</button>
         </div>
     </div>
 
     <hr>
+
+    <?php } ?>
 
     <h2>Alle PlanCare services</h2>
 
@@ -65,7 +77,7 @@ use API\CallAPI;
             echo "
                   <tr>
                       <td>".$service['id']."</td>
-                      <td>".$serviceName."</td>
+                      <td>".$service['name']."</td>
                       <td>".$service['project']."</td>
                       <td>".$service['plancare_version']."</td>                            
                       <td><a href=\"properties.php?serviceId=".$service['id']."  \"><button class='next-btn'><span>Eigenschappen </span></button></a></td>                            
