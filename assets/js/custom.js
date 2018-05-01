@@ -4,7 +4,18 @@ setTimeout(function(){
 }, 5000);
 
 $(document).ready( function () {
-    $('#services').DataTable();
+    $('#services').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax:{
+            url: "../../classes/API/ajax/ajaxCall.php",
+            type:"POST"
+        }
+        // ,columnDefs: [{
+        //     "defaultContent": "-",
+        //     "targets": "_all"
+        // }]
+    });
 } );
 
 $(function() {

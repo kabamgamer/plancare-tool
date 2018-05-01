@@ -2,7 +2,6 @@
 session_start();
 include "autoload.php";
 
-use API\CallAPI;
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +12,7 @@ use API\CallAPI;
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
 
@@ -61,31 +60,6 @@ use API\CallAPI;
             <th></th>
         </tr>
         </thead>
-
-        <!-- All services -->
-        <tbody>
-        <?php
-        // Get services form API
-        $result = new CallAPI;
-        $results = $result->getServices();
-
-        // Place services in table
-        foreach($results as $service){
-            $serviceName = explode("/", $service['name']);
-            $serviceName = $serviceName[1]."/".$serviceName[4];
-
-            echo "
-                  <tr>
-                      <td>".$service['id']."</td>
-                      <td>".$service['name']."</td>
-                      <td>".$service['project']."</td>
-                      <td>".$service['plancare_version']."</td>                            
-                      <td><a href=\"properties.php?serviceId=".$service['id']."  \"><button class='next-btn'><span>Eigenschappen </span></button></a></td>                            
-                  </tr>";
-        }
-
-        ?>
-        </tbody>
     </table>
     <?php include "includes/modal.inc.php";?>
 
@@ -94,7 +68,7 @@ use API\CallAPI;
 
 <!-- JavaScript -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.validate.js"></script>

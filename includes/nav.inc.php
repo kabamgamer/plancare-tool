@@ -25,7 +25,7 @@ $results = $result->getCustomers();
                     foreach ($results as $customer){
                         $customerId = $customer["id"];
                         $customerName = $customer["name"];
-                        $active = ($page == "index.php?customerId=$customerId" ? "active" :"");
+                        $active = ($page == "/index.php?customerId=$customerId" ? "active" :"");
                         echo "<a class=\"dropdown-item $active\" href=\"index.php?customerId=$customerId\">$customerName</a>";
                     }
                     ?>
