@@ -11,7 +11,7 @@ class CallAPI
      */
     protected function headers($curl)
     {
-        $token = "207.658313.1525185328.a6ddf051e2db1c4b03a7f50ad522fba1191280e5ab25ccfd4c2710e832be50fd";
+        $token = "207.658313.1525359922.9ba491df9c0060448d44e62a8e19c0424a8243caeecdd04b2575cc0fcdd549de";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -94,9 +94,13 @@ class CallAPI
     /**
      * Method for retrieving PlanCare services
      */
-    public function getServices($id = null)
+    public function getServices()
     {
-        return $this->apiCall("GET", "/plancareServices/$id?limit=10");
+        return $this->apiCall("GET", "/plancareServices/");
+    }
+    public function getService($id)
+    {
+        return $this->apiCall("GET", "/plancareServices/$id");
     }
 
     /**

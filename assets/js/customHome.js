@@ -1,8 +1,12 @@
+// Hide error/success messages after 5 seconds
 setTimeout(function(){
     document.getElementById('hide').style.display = 'none';
     document.getElementById('hide').innerHTML = '';
 }, 5000);
 
+/**
+ * Datatable config
+ */
 $(document).ready( function () {
     $('#services').DataTable({
         processing: true,
@@ -11,13 +15,16 @@ $(document).ready( function () {
             url: "../../classes/API/ajax/ajaxCall.php",
             type:"POST"
         }
-        // ,columnDefs: [{
-        //     "defaultContent": "-",
-        //     "targets": "_all"
-        // }]
+        ,columnDefs: [{
+            "defaultContent": "-",
+            "targets": "_all"
+        }]
     });
 } );
 
+/**
+ * Form validation addServices
+ */
 $(function() {
     $("#addService").validate({
         rules: {
@@ -57,10 +64,7 @@ $(function() {
     })
 });
 
-jQuery.validator.addMethod("customerChars", function (value, element) {
-    return this.optional(element) || /^[a-zA-Z0-9 ]*$/.test(value);
-}, "Dit veld mag alleen hoofdletters, kleine letters, cijfers en spaties bevatten.");
-
+// Custom validator
 jQuery.validator.addMethod("serviceNameChars", function (value, element) {
     return this.optional(element) || /^[a-zA-Z0-9,\/ ]*$/.test(value);
 }, "Dit veld mag alleen hoofdletters, kleine letters, cijfers, komma, voorwaardse slash en spaties bevatten.");

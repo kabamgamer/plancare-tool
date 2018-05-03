@@ -8,13 +8,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" id="addService" name="addService" action="\classes\validators\submits.php">
+            <form method="POST" id="addService" name="addService" action="">
                 <input type="hidden" name="customerId" value="<?= $_GET["customerId"] ?>">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="customer">Klant</label>
-                        <input class="form-control" type="text" name="customer" id="customer" value="<?= (isset($_GET['customer']) ? $_GET['customer'] : '') ?>" placeholder="Klant">
-                    </div>
                     <div class="form-group">
                         <label for="type">Type</label>
                         <select class="form-control" name="type" id="type">
@@ -26,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Service naam</label>
-                        <input class="form-control" type="text" minlength="2" name="serviceName" id="serviceName" value="<?= (isset($_GET['serviceName']) ? $_GET['serviceName'] : '') ?>" placeholder="Naam">
+                        <input class="form-control" type="text" name="serviceName" id="serviceName" value="<?= \formHandlers\Input::get('serviceName') ?>" placeholder="Naam">
                     </div>
                 </div>
                 <div class="modal-footer">

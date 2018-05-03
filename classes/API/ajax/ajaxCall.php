@@ -21,13 +21,13 @@ $resultFilter = $resultNum;
 $data = array();
 
 // Place services in table
-foreach($services as $service){
+foreach($services as $headers => $service){
     $subdata = array();
     $subdata[] = $service["id"]; // ID
     $subdata[] = $service["name"]; // Name
     $subdata[] = $service["project"]; // Project
     $subdata[] = $service["plancare_version"]; // Version
-    $subdata[] = "<td><a href=\"properties.php?serviceId=".$service['id']."  \"><button class='next-btn'><span>Eigenschappen </span></button></a></td>";
+    $subdata[] = "<a href=\"properties.php?serviceId=".$service['id']."  \"><button class='next-btn'><span>Eigenschappen </span></button></a>";
     $data[] = $subdata;
 }
 

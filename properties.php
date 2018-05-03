@@ -1,11 +1,12 @@
 <?php
+namespace formHandlers;
+
+use \API\CallAPI;
+
 session_start();
 include "autoload.php";
 
-use \API\CallAPI;
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
     <!-- Meta tags -->
@@ -22,7 +23,47 @@ use \API\CallAPI;
 <body>
 <?php
     include "includes/nav.inc.php";
-    include "includes/sessions.inc.php";
+
+    /**
+     * Validate putServices form
+     */
+    if(Input::exists()){
+        $validate = new Validator;
+        $validation = $validate->check($_POST, array(
+            'rest_service_address' => [
+                "isRequired" => true
+            ],
+            'rest_api_key' => [
+                "isRequired" => true
+            ],
+            'username' => [
+                "isRequired" => true
+            ],
+            'password' => [
+                "isRequired" => true
+            ]
+        ));
+
+        if($validation->passed("Eigenschappen succesvol aangepast")){
+            $api = new CallAPI;
+            $serviceId = $_GET["serviceId"];
+
+            $data = array(
+                "rest_service_address" => $_POST["rest_service_address"],
+                "rest_api_key" => $_POST["rest_api_key"],
+                "username" => $_POST["username"],
+                "password" => $_POST["password"]
+            );
+
+            if(!$api->updateProperty($serviceId, $data)){
+                echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+            }
+        } else {
+            foreach($validate->errors() as $error) {
+                echo "<div class='alert alert-danger container' id='hide'> {$error} </div>";
+            }
+        }
+    }
 ?>
 <button class="btn btn-back" onclick="window.history.back()">❮ Terug</button>
 <div class="container">
@@ -33,7 +74,7 @@ use \API\CallAPI;
     <?php
         $serviceId = $_GET["serviceId"];
         $result = new CallAPI;
-        $result = $result->getServices($serviceId);
+        $result = $result->getService($serviceId);
     ?>
 
     <!-- Form -->
@@ -52,26 +93,26 @@ use \API\CallAPI;
 
             <hr>
 
-            <form method="post" id="putService" name="putService" action="\classes\validators\submits.php">
+            <form method="post" id="putService" name="putService" action="">
                 <input type="hidden" name="serviceId" value="<?= $serviceId ?>">
                 <div class="form-group">
                     <label for="url">API Url</label>
-                    <input type="text" value="<?= $result['rest_service_address'] ?>" class="form-control" name="rest_service_address">
+                    <input type="text" value="<?= $result['rest_service_address'] ?>" class="form-control" name="rest_service_address" id="rest_service_address">
                 </div>
                 <div class="form-group">
                     <label for="key">API Key</label>
-                    <input type="text" value="<?= $result['rest_api_key'] ?>" class="form-control" name="rest_api_key">
+                    <input type="text" value="<?= $result['rest_api_key'] ?>" class="form-control" name="rest_api_key" id="rest_api_key">
                 </div>
                 <div class="form-group">
                     <label for="username">API Gebruikersnaam</label>
-                    <input type="text" value="<?= $result['username'] ?>" class="form-control" name="username">
+                    <input type="text" value="<?= $result['username'] ?>" class="form-control" name="username" id="username">
                 </div>
                 <div class="form-group">
                     <label for="password">API Wachtwoord</label>
-                    <input type="text" value="<?= $result['password'] ?>" class="form-control" name="password">
+                    <input type="text" value="<?= $result['password'] ?>" class="form-control" name="password" id="password">
                 </div>
 
-                <input type="submit" name="submitServicePut" class="btn btn-primary" value="Opslaan">
+                <input type="submit" name="submitServicePut" class="btn btn-primary" id="submit-button" value="Opslaan">
             </form>
         </div>
     </div>
@@ -84,7 +125,7 @@ use \API\CallAPI;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.validate.js"></script>
-<script src="assets/js/custom.js"></script>
+<script src="assets/js/customProperties.js"></script>
 <!-- Font Awesome -->
 <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
 

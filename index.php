@@ -1,10 +1,12 @@
 <?php
+namespace formHandlers;
+
+use \API\CallAPI;
+
 session_start();
 include "autoload.php";
 
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
     <!-- Meta tags -->
@@ -23,7 +25,38 @@ include "autoload.php";
 <body>
 <?php
     include "includes/nav.inc.php";
-    include "includes/sessions.inc.php";
+
+    /**
+     * Validate addServices form
+     */
+    if(Input::exists()){
+        $validate = new Validator;
+        $validation = $validate->check($_POST, array(
+            'serviceName' => [
+                "name" => "Service naam",
+                "isRequired" => true,
+                "minLength" => 2,
+                "matchChars" => "a-zA-Z0-9 \/"
+            ]
+        ));
+
+        if($validation->passed("Project succesvol aangemaakt")){
+            $api = new CallAPI;
+
+            $data = array(
+                "customerId" => $_POST["customerId"],
+                "name" => $_POST["serviceName"]
+            );
+
+            if($api->postService($data)){
+                echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+            }
+        } else {
+            foreach($validate->errors() as $error) {
+                echo "<div class='alert alert-danger container' id='hide'> {$error} </div>";
+            }
+        }
+    }
 ?>
 
 
@@ -72,6 +105,6 @@ include "autoload.php";
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.validate.js"></script>
-<script src="assets/js/custom.js"></script>
+<script src="assets/js/customHome.js"></script>
 
 </html>
