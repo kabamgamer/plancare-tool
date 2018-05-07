@@ -8,12 +8,20 @@ setTimeout(function(){
  * Datatable config
  */
 $(document).ready( function () {
+    var path = window.location.search;
+    var index = path.indexOf("=");
+    var customerId = path.substring(index+1);
+
+
     $('#services').DataTable({
         processing: true,
         serverSide: true,
         ajax:{
+            type:"POST",
             url: "../../classes/API/ajax/ajaxCall.php",
-            type:"POST"
+            data: {
+                customerId: customerId
+            }
         }
         ,columnDefs: [{
             "defaultContent": "-",
@@ -22,7 +30,7 @@ $(document).ready( function () {
     });
 } );
 
-/**
+/**custo
  * Form validation addServices
  */
 $(function() {
@@ -46,7 +54,6 @@ $(function() {
             var i;
 
             button.setAttribute("disabled", "disabled");
-            button.style.cursor = "progress";
             body.classList.add("wait");
 
             form.submit();

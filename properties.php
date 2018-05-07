@@ -74,7 +74,7 @@ include "autoload.php";
     <?php
         $serviceId = $_GET["serviceId"];
         $result = new CallAPI;
-        $result = $result->getService($serviceId);
+        $result = $result->getService($serviceId)[1];
     ?>
 
     <!-- Form -->

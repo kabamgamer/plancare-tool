@@ -14,11 +14,26 @@ $col = [
 ]; //create columns
 
 $api = new CallAPI;
-$services = $api->getServices();
-$resultNum = count($services);
-$resultFilter = $resultNum;
+$responseHeaders = $api->getServices()[0];
+
+// Search data
+if(!empty($request['search']['value'])){
+    $result = $api->getServices("?id*=". $request['search']['value'] . ",name*=" . $request['search']['value'] . ",project*=" . $request['search']['value']);
+    $services = $result["body"];
+    $pos = strpos($result['headers'][13],":");
+    $resultNum = substr($result['headers'][13], $pos);
+}
+
+// Order data
+$sort = "sort".ucfirst($request['order'][0]['dir']);
+$result = $api->getServices("?projects.customerID=" . $_POST['customerId'] . "&limit=" . $request['length'] . "&offset=".$request['start'] /*. "&$sort=" . $col[$request['order'][0]['column']]*/);
+$services = $result["body"];
+$pos = strpos($result['headers'][13],":");
+$resultNum = substr($result['headers'][13], $pos);
 
 $data = array();
+
+$resultFilter = $resultNum;
 
 // Place services in table
 foreach($services as $headers => $service){

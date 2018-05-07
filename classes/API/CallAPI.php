@@ -11,7 +11,7 @@ class CallAPI
      */
     protected function headers($curl)
     {
-        $token = "207.658313.1525359922.9ba491df9c0060448d44e62a8e19c0424a8243caeecdd04b2575cc0fcdd549de";
+        $token = "207.658313.1525732477.c10a1f4f906d99898a88258a9dbb182dfe1b9dc8156cbd105d0a1e6bcdeaf98d";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -73,9 +73,23 @@ class CallAPI
         // Set URL and other appropriate options
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($curl, CURLOPT_VERBOSE, 1);
+        curl_setopt($curl, CURLOPT_HEADER, 1);
+
+        $response = curl_exec($curl);
+
+        $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+        $headers = substr($response, 0, $header_size);
+        $header = explode("\n", $headers);
+        $body = substr($response, $header_size);
 
         // Decode json to array
-        $result = json_decode(curl_exec($curl), TRUE);
+        if($method == "POST" || $method == "PUT") {
+            $result = json_decode($body, TRUE);
+        } else {
+            $result = array("headers" => $header, "body" => json_decode($body, TRUE));
+        }
+
 
         curl_close($curl);
 
@@ -86,17 +100,17 @@ class CallAPI
     /**
      * Get customers
      */
-    public function getCustomers($id = null)
+    public function getCustomers()
     {
-        return $this->apiCall("GET", "/customers/$id?limit=10");
+        return $this->apiCall("GET", "/customers/");
     }
 
     /**
      * Method for retrieving PlanCare services
      */
-    public function getServices()
+    public function getServices($request = null)
     {
-        return $this->apiCall("GET", "/plancareServices/");
+        return $this->apiCall("GET", "/plancareServices/".$request);
     }
     public function getService($id)
     {

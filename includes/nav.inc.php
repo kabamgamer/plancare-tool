@@ -6,7 +6,7 @@ $page = $_SERVER[REQUEST_URI];
 
 // Get services form API
 $result = new CallAPI;
-$results = $result->getCustomers();
+$results = $result->getCustomers()[1];
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

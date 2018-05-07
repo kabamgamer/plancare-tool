@@ -6,6 +6,18 @@ use \API\CallAPI;
 session_start();
 include "autoload.php";
 
+$api = new CallAPI;
+$responseHeaders = $api->getServices("?projects.customerID=11&limit=10&offset=0")["headers"];
+
+foreach ($responseHeaders as $header => $value){
+    echo $header . " " . $value;
+}
+
+print "<pre>";
+print_r($responseHeaders);
+print "</pre>";
+
+
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -78,6 +90,10 @@ include "autoload.php";
 
     <hr>
 
+    <script>
+        var emptyTable = document.getElementsByClassName("dataTables_empty");
+        emptyTable.innerHTML = "Kier eerst een klant"
+    </script>
     <?php } ?>
 
     <h2>Alle PlanCare services</h2>
@@ -97,6 +113,14 @@ include "autoload.php";
     <?php include "includes/modal.inc.php";?>
 
 </div>
+
+<div id="customerId" style="display: none">
+    <?php
+        $customerId = $_GET['customerId'];
+        echo htmlspecialchars($customerId);
+    ?>
+</div>
+
 </body>
 
 <!-- JavaScript -->
