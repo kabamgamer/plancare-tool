@@ -16,9 +16,31 @@ $(document).ready( function () {
     $('#services').DataTable({
         processing: true,
         serverSide: true,
+        language: {
+            sLengthMenu: "_MENU_ resultaten weergeven",
+            sZeroRecords: "Kies eerst een klant.",
+            sInfo: "_START_ tot _END_ van _TOTAL_ resultaten",
+            sInfoEmpty: "Geen resultaten om weer te geven",
+            sInfoFiltered: " (gefilterd uit _MAX_ resultaten)",
+            sInfoPostFix: "",
+            sSearch: "Zoeken:",
+            sEmptyTable: "Deze klant heeft nog geen PlanCare services",
+            sInfoThousands: ".",
+            sLoadingRecords: "Een moment geduld aub - bezig met laden...",
+            oPaginate: {
+                sFirst: "Eerste",
+                sLast: "Laatste",
+                sNext: "Volgende",
+                sPrevious: "Vorige"
+            },
+            oAria: {
+                sSortAscending:  ": activeer om kolom oplopend te sorteren",
+                sSortDescending: ": activeer om kolom aflopend te sorteren"
+            }
+        },
         ajax:{
             type:"POST",
-            url: "../../classes/API/ajax/ajaxCall.php",
+            url: "../../classes/API/ajax/ajaxCallDataTable.php",
             data: {
                 customerId: customerId
             }

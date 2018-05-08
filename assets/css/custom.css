@@ -75,6 +75,11 @@ nav{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
+.btn-outline-secondary:hover{
+    border-color: #4e66ff;
+    background: #4e66ff;
+}
+
 .refresh{
     max-width: 40px !important;
     cursor: pointer;

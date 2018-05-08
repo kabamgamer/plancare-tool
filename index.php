@@ -6,17 +6,9 @@ use \API\CallAPI;
 session_start();
 include "autoload.php";
 
-$api = new CallAPI;
-$responseHeaders = $api->getServices("?projects.customerID=11&limit=10&offset=0")["headers"];
-
-foreach ($responseHeaders as $header => $value){
-    echo $header . " " . $value;
+if(!isset($_GET["customerId"])){
+    header("Location: index.php?customerId=0");
 }
-
-print "<pre>";
-print_r($responseHeaders);
-print "</pre>";
-
 
 ?><!DOCTYPE html>
 <html>
@@ -30,7 +22,6 @@ print "</pre>";
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
 
-
     <title>PlanCare Implemmentatietool - Home</title>
 </head>
 
@@ -41,31 +32,65 @@ print "</pre>";
     /**
      * Validate addServices form
      */
-    if(Input::exists()){
-        $validate = new Validator;
-        $validation = $validate->check($_POST, array(
-            'serviceName' => [
-                "name" => "Service naam",
-                "isRequired" => true,
-                "minLength" => 2,
-                "matchChars" => "a-zA-Z0-9 \/"
-            ]
-        ));
+    if(isset($_POST["submitServicePost"])) {
+        if (Input::exists()) {
+            $validate = new Validator;
+            $validation = $validate->check($_POST, array(
+                'serviceName' => [
+                    "name" => "Service naam",
+                    "isRequired" => true,
+                    "minLength" => 2,
+                    "matchChars" => "a-zA-Z0-9 \/"
+                ]
+            ));
 
-        if($validation->passed("Project succesvol aangemaakt")){
-            $api = new CallAPI;
+            if ($validation->passed("Project succesvol aangemaakt")) {
+                $api = new CallAPI;
 
-            $data = array(
-                "customerId" => $_POST["customerId"],
-                "name" => $_POST["serviceName"]
-            );
+                $data = array(
+                    "customer" => $_POST["customerId"],
+                    "name" => $_POST["serviceName"]
+                );
 
-            if($api->postService($data)){
-                echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+                if ($api->postService($data)) {
+                    echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+                }
+            } else {
+                foreach ($validate->errors() as $error) {
+                    echo "<div class='alert alert-danger container' id='hide'> {$error} </div>";
+                }
             }
-        } else {
-            foreach($validate->errors() as $error) {
-                echo "<div class='alert alert-danger container' id='hide'> {$error} </div>";
+        }
+    }
+
+    /**
+     * Validate PostCustomer
+     */
+    if (isset($_POST["postCustomer"])) {
+        if (Input::exists()) {
+            $validate = new Validator;
+            $validation = $validate->check($_POST, [
+                "customerName" => [
+                    "name" => "Klant naam",
+                    "isRequired" => true,
+                    "minLength" => 2
+                ]
+            ]);
+
+            if ($validation->passed("Klant succesvol aangemaakt!")) {
+                $api = new CallAPI;
+
+                $data = array(
+                    "name" => $_POST["customerName"]
+                );
+
+                if ($api->postCustomers($data)) {
+                    echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+                }
+            } else {
+                foreach ($validate->errors() as $error) {
+                    echo "<div class='alert alert-danger container' id='hide'> {$error} </div>";
+                }
             }
         }
     }
@@ -74,16 +99,14 @@ print "</pre>";
 
 <div class="container">
 
-    <!-- New customer -->
-    <?php if(isset($_GET["customerId"]) && !empty(($_GET["customerId"]))){ ?>
+    <!-- New Service -->
+    <?php if(isset($_GET["customerId"]) && $_GET["customerId"] != 0){ ?>
 
     <div class="row">
         <div class="col-md-8 col-sm-8">
             <h2>Nieuwe PlanCare service</h2>
         </div>
         <div class="col-md-4 col-sm-4 align-right">
-
-
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Toevoegen</button>
         </div>
     </div>
@@ -91,8 +114,7 @@ print "</pre>";
     <hr>
 
     <script>
-        var emptyTable = document.getElementsByClassName("dataTables_empty");
-        emptyTable.innerHTML = "Kier eerst een klant"
+
     </script>
     <?php } ?>
 
@@ -114,13 +136,6 @@ print "</pre>";
 
 </div>
 
-<div id="customerId" style="display: none">
-    <?php
-        $customerId = $_GET['customerId'];
-        echo htmlspecialchars($customerId);
-    ?>
-</div>
-
 </body>
 
 <!-- JavaScript -->
@@ -128,6 +143,7 @@ print "</pre>";
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="jQuery-Bootstrap-4-Typeahead-Plugin/bootstrap3-typeahead.js"></script>
 <script src="assets/js/jquery.validate.js"></script>
 <script src="assets/js/customHome.js"></script>
 

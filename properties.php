@@ -65,7 +65,7 @@ include "autoload.php";
         }
     }
 ?>
-<button class="btn btn-back" onclick="window.history.back()">❮ Terug</button>
+<a href="index.php?customerId=<?= $_GET['customerId'] ?>"><button class="btn btn-back">❮ Terug</button></a>
 <div class="container">
     <h2>Eigenschappen</h2>
 
@@ -74,7 +74,7 @@ include "autoload.php";
     <?php
         $serviceId = $_GET["serviceId"];
         $result = new CallAPI;
-        $result = $result->getService($serviceId)[1];
+        $result = $result->getService($serviceId)["body"];
     ?>
 
     <!-- Form -->
@@ -124,6 +124,7 @@ include "autoload.php";
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="jQuery-Bootstrap-4-Typeahead-Plugin/bootstrap3-typeahead.js"></script>
 <script src="assets/js/jquery.validate.js"></script>
 <script src="assets/js/customProperties.js"></script>
 <!-- Font Awesome -->

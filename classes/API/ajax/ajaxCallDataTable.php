@@ -20,16 +20,16 @@ $responseHeaders = $api->getServices()[0];
 if(!empty($request['search']['value'])){
     $result = $api->getServices("?id*=". $request['search']['value'] . ",name*=" . $request['search']['value'] . ",project*=" . $request['search']['value']);
     $services = $result["body"];
-    $pos = strpos($result['headers'][13],":");
-    $resultNum = substr($result['headers'][13], $pos);
+    $pos = intval(strpos($result['headers'][13],":")) + 1;
+    $resultNum = intval(substr($result['headers'][13], $pos));
 }
 
 // Order data
 $sort = "sort".ucfirst($request['order'][0]['dir']);
-$result = $api->getServices("?projects.customerID=" . $_POST['customerId'] . "&limit=" . $request['length'] . "&offset=".$request['start'] /*. "&$sort=" . $col[$request['order'][0]['column']]*/);
+$result = $api->getServices(($_POST['customerId'] == 0 ? "?" : "?projects.customerID=" . $_POST['customerId']) . "&limit=" . $request['length'] . "&offset=".$request['start'] /*. "&$sort=" . $col[$request['order'][0]['column']]*/);
 $services = $result["body"];
-$pos = strpos($result['headers'][13],":");
-$resultNum = substr($result['headers'][13], $pos);
+$pos = intval(strpos($result['headers'][13],":")) + 1;
+$resultNum = intval(substr($result['headers'][13], $pos));
 
 $data = array();
 
@@ -42,7 +42,7 @@ foreach($services as $headers => $service){
     $subdata[] = $service["name"]; // Name
     $subdata[] = $service["project"]; // Project
     $subdata[] = $service["plancare_version"]; // Version
-    $subdata[] = "<a href=\"properties.php?serviceId=".$service['id']."  \"><button class='next-btn'><span>Eigenschappen </span></button></a>";
+    $subdata[] = "<a href=\"properties.php?serviceId=".$service['id']."&customerId=" . $_POST["customerId"] . "  \"><button class='next-btn'><span>Eigenschappen </span></button></a>";
     $data[] = $subdata;
 }
 

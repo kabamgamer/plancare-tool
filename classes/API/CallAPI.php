@@ -11,7 +11,7 @@ class CallAPI
      */
     protected function headers($curl)
     {
-        $token = "207.658313.1525732477.c10a1f4f906d99898a88258a9dbb182dfe1b9dc8156cbd105d0a1e6bcdeaf98d";
+        $token = "207.658313.1525802302.85db6eb57265e9d5593374310f1e290be8b07a93b0df414dc986cafc0327f97f";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -100,9 +100,13 @@ class CallAPI
     /**
      * Get customers
      */
-    public function getCustomers()
+    public function getCustomers($request = null)
     {
-        return $this->apiCall("GET", "/customers/");
+        return $this->apiCall("GET", "/customers/$request");
+    }
+    public function postCustomers($data)
+    {
+        return $this->apiCall("POST", "/customers", $data);
     }
 
     /**
@@ -112,9 +116,9 @@ class CallAPI
     {
         return $this->apiCall("GET", "/plancareServices/".$request);
     }
-    public function getService($id)
+    public function getService($request)
     {
-        return $this->apiCall("GET", "/plancareServices/$id");
+        return $this->apiCall("GET", "/plancareServices/$request");
     }
 
     /**
@@ -122,7 +126,7 @@ class CallAPI
      */
     public function postService($data)
     {
-        return $this->apiCall("POST", "/plancareServices", $data);
+        return $this->apiCall("POST", "/plancareServices/forCustomer", $data);
     }
 
     /**
