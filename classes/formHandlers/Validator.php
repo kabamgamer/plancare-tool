@@ -21,22 +21,27 @@ class Validator
     {
         foreach ($items as $item => $rules) {
             foreach ($rules as $rule => $rule_value) {
-
                 if (isset($source[$item])){
                     $value = $source[$item];
                 } else {
                     $value = null;
                 }
 
+                if($rule === "name") {
+                    $name = $rule_value;
+                } else {
+                    $name = $item;
+                }
+
                 switch ($rule) {
                     case "isRequired":
                         if(empty($value)) {
-                            $this->addError("{$item} is een verplicht veld");
+                            $this->addError("{$name} is een verplicht veld");
                         }
                     break;
                     case "minLength":
                         if(strlen($value) < $rule_value && !empty($value)) {
-                            $this->addError("{$item} moet langer zijn dan {$rule_value} karakters");
+                            $this->addError("{$name} moet langer zijn dan {$rule_value} karakters");
                         }
                     break;
                     case "matchChars":
@@ -44,10 +49,9 @@ class Validator
                         $rule_value = str_replace("\\", "", $rule_value);
 
                         if(!preg_match($rule_match, $value)) {
-                            $this->addError("{$item} mag alleen de karakters \" {$rule_value} \" bevatten.");
+                            $this->addError("{$name} mag alleen de karakters \" {$rule_value} \" bevatten.");
                         }
                     break;
-
                 }
             }
         }

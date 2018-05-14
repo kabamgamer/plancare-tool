@@ -27,41 +27,54 @@ include "autoload.php";
     /**
      * Validate putServices form
      */
-    if(Input::exists()){
-        $validate = new Validator;
-        $validation = $validate->check($_POST, array(
-            'rest_service_address' => [
-                "isRequired" => true
-            ],
-            'rest_api_key' => [
-                "isRequired" => true
-            ],
-            'username' => [
-                "isRequired" => true
-            ],
-            'password' => [
-                "isRequired" => true
-            ]
-        ));
+    if(isset($_POST["submitServicePut"])) {
+        if (Input::exists()) {
+            $validate = new Validator;
+            $validation = $validate->check($_POST, array(
+                'rest_service_address' => [
+                    "isRequired" => true
+                ],
+                'rest_api_key' => [
+                    "isRequired" => true
+                ],
+                'username' => [
+                    "isRequired" => true
+                ],
+                'password' => [
+                    "isRequired" => true
+                ]
+            ));
 
-        if($validation->passed("Eigenschappen succesvol aangepast")){
-            $api = new CallAPI;
-            $serviceId = $_GET["serviceId"];
+            if ($validation->passed("Eigenschappen succesvol aangepast")) {
+                $api = new CallAPI;
+                $serviceId = $_GET["serviceId"];
 
-            $data = array(
-                "rest_service_address" => $_POST["rest_service_address"],
-                "rest_api_key" => $_POST["rest_api_key"],
-                "username" => $_POST["username"],
-                "password" => $_POST["password"]
-            );
+                $data = array(
+                    "rest_service_address" => $_POST["rest_service_address"],
+                    "rest_api_key" => $_POST["rest_api_key"],
+                    "username" => $_POST["username"],
+                    "password" => $_POST["password"]
+                );
 
-            if(!$api->updateProperty($serviceId, $data)){
-                echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+                if (!$api->updateProperty($serviceId, $data)) {
+                    echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+                }
+            } else {
+                foreach ($validate->errors() as $error) {
+                    echo "<div class='alert alert-danger container' id='hide'> {$error} </div>";
+                }
             }
+        }
+    }
+
+
+    $version = "";
+    if(isset($_POST["getVersion"])) {
+        $api = new CallAPI;
+        if(is_string($api->getVersion($_GET["serviceId"]))){
+            $version = $api->getVersion($_GET["serviceId"]);
         } else {
-            foreach($validate->errors() as $error) {
-                echo "<div class='alert alert-danger container' id='hide'> {$error} </div>";
-            }
+            $version = "";
         }
     }
 ?>
@@ -85,9 +98,9 @@ include "autoload.php";
 
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <input type="text" class="form-control version" name="version" value="<?= $result['plancare_version'] ?>" disabled>
+                        <input type="text" class="form-control version" id="version" name="version" value="<?= $version ?>" disabled>
                     </div>
-                    <button class="form-control refresh"><i class="fas fa-sync-alt"></i></button>
+                    <form action="" method="post"><button type="submit" name="getVersion" value="" class="form-control refresh"><i class="fas fa-sync-alt"></i></button></form>
                 </div>
             </div>
 
@@ -96,11 +109,11 @@ include "autoload.php";
             <form method="post" id="putService" name="putService" action="">
                 <input type="hidden" name="serviceId" value="<?= $serviceId ?>">
                 <div class="form-group">
-                    <label for="url">API Url</label>
+                    <label for="rest_service_address">API Url</label>
                     <input type="text" value="<?= $result['rest_service_address'] ?>" class="form-control" name="rest_service_address" id="rest_service_address">
                 </div>
                 <div class="form-group">
-                    <label for="key">API Key</label>
+                    <label for="rest_api_key">API Key</label>
                     <input type="text" value="<?= $result['rest_api_key'] ?>" class="form-control" name="rest_api_key" id="rest_api_key">
                 </div>
                 <div class="form-group">

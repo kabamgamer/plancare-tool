@@ -8,7 +8,7 @@ use API\CallAPI;
 $request = $_POST["query"];
 
 $api = new CallAPI;
-$customers = $api->getCustomers("?name*=".$request)["body"];
+$customers = $api->getCustomers("?name*=".$request."&limit=8")["body"];
 
 $data = array();
 

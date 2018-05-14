@@ -24,7 +24,7 @@ $(document).ready( function () {
             sInfoFiltered: " (gefilterd uit _MAX_ resultaten)",
             sInfoPostFix: "",
             sSearch: "Zoeken:",
-            sEmptyTable: "Deze klant heeft nog geen PlanCare services",
+            sEmptyTable: "Geen PlanCare services gevonden",
             sInfoThousands: ".",
             sLoadingRecords: "Een moment geduld aub - bezig met laden...",
             oPaginate: {

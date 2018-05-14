@@ -8,6 +8,9 @@ include "autoload.php";
 
 if(!isset($_GET["customerId"])){
     header("Location: index.php?customerId=0");
+} else {
+    $customers = new CallAPI;
+    $customer = $customers->getCustomers($_GET["customerId"])["body"]["name"];
 }
 
 ?><!DOCTYPE html>
@@ -84,7 +87,7 @@ if(!isset($_GET["customerId"])){
                     "name" => $_POST["customerName"]
                 );
 
-                if ($api->postCustomers($data)) {
+                if ($api->postCustomer($data)) {
                     echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
                 }
             } else {
@@ -117,6 +120,8 @@ if(!isset($_GET["customerId"])){
 
     </script>
     <?php } ?>
+
+    <p><i><?= $customer ?></i></p>
 
     <h2>Alle PlanCare services</h2>
 

@@ -8,10 +8,13 @@ class CallAPI
 
     /**
      * Get headers
+     *
+     * @param $curl
      */
     protected function headers($curl)
     {
-        $token = "207.658313.1525802302.85db6eb57265e9d5593374310f1e290be8b07a93b0df414dc986cafc0327f97f";
+//        $token = $this->authorization($curl);
+        $token = "207.658313.1526336515.dd489a4b4d63ca760659586cf7b019a255319e7e48c56fc2139e26514f45f87d";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -19,6 +22,23 @@ class CallAPI
 
         // Send headers
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    }
+
+    /**
+     * Create token out of refresh token
+     *
+     * @param $curl
+     * @return array|mixed
+     */
+    protected function authorization($curl)
+    {
+        $data = [
+            "refreshToken" => "PFANJeVTP9afgPMFDxME1pphUWmak0eqhwzxE6nXEV1n9tpwaqB7HJtcS8jTGSve"
+        ];
+
+        $result = $this->apiCall("POST", "/api/createAuthTokenFromRefreshToken", $data);
+
+        return $result;
     }
 
     /**
@@ -98,19 +118,19 @@ class CallAPI
 
 
     /**
-     * Get customers
+     * Methods for Customers
      */
     public function getCustomers($request = null)
     {
         return $this->apiCall("GET", "/customers/$request");
     }
-    public function postCustomers($data)
+    public function postCustomer($data)
     {
         return $this->apiCall("POST", "/customers", $data);
     }
 
     /**
-     * Method for retrieving PlanCare services
+     * Methods for PlanCare services
      */
     public function getServices($request = null)
     {
@@ -120,10 +140,6 @@ class CallAPI
     {
         return $this->apiCall("GET", "/plancareServices/$request");
     }
-
-    /**
-     * Method for posting new service
-     */
     public function postService($data)
     {
         return $this->apiCall("POST", "/plancareServices/forCustomer", $data);
@@ -139,5 +155,12 @@ class CallAPI
         return $this->apiCall("PUT", "/plancareServices/$serviceId", $data);
     }
 
+    public function getVersion($id)
+    {
+        $data = [
+            "method" => "getPlancareversionsPlancareversion"
+        ];
+        return $this->apiCall("POST", "/plancareServices/$id/executeOnConnector", $data);
+    }
 
 }

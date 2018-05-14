@@ -158,8 +158,8 @@
       } else {
         element = this.$menu.insertAfter(this.$element);
         this.hasSameParent = true;
-      }      
-      
+      }
+
       if (!this.hasSameParent) {
           // We cannot rely on the element position, need to position relative to the window
           element.css("position", "fixed");
@@ -181,7 +181,7 @@
       if (this.options.fitToElement === true) {
           element.css("width", this.$element.outerWidth() + "px");
       }
-    
+
       this.shown = true;
       return this;
     },
@@ -206,7 +206,7 @@
 
       var worker = $.proxy(function () {
 
-        // Bloodhound (since 0.11) needs three arguments. 
+        // Bloodhound (since 0.11) needs three arguments.
         // Two of them are callback functions (sync and async) for local and remote data processing
         // see https://github.com/twitter/typeahead.js/blob/master/src/bloodhound/bloodhound.js#L132
         if ($.isFunction(this.source) && this.source.length === 3) {
@@ -423,7 +423,7 @@
         this.$element.on('keydown.bootstrap3Typeahead', $.proxy(this.keydown, this));
       }
 
-      var itemTagName = $(this.options.item || this.theme.item).prop('tagName')
+      var itemTagName = $(this.options.item || this.theme.item).prop('tagName');
       if ('ontouchstart' in document.documentElement) {
         this.$menu
           .on('touchstart', itemTagName, $.proxy(this.touchstart, this))
@@ -559,7 +559,7 @@
         this.keyPressed = false;
         if (this.options.showHintOnFocus && this.skipShowHintOnFocus !== true) {
           if(this.options.showHintOnFocus === "all") {
-            this.lookup(""); 
+            this.lookup("");
           } else {
             this.lookup();
           }
@@ -582,7 +582,7 @@
         this.skipShowHintOnFocus = true;
         this.$element.focus();
         this.mouseddown = false;
-      } 
+      }
     },
 
     click: function (e) {
@@ -675,14 +675,14 @@
         itemContentSelector: "a",
         headerHtml: '<li class="dropdown-header"></li>',
         headerDivider: '<li class="divider" role="separator"></li>'
-      },     
+      },
       bootstrap4: {
         menu: '<div class="typeahead dropdown-menu" role="listbox"></div>',
         item: '<button class="dropdown-item" role="option"></button>',
         itemContentSelector: '.dropdown-item',
         headerHtml: '<h6 class="dropdown-header"></h6>',
         headerDivider: '<div class="dropdown-divider"></div>'
-      } 
+      }
     }
   };
 
@@ -713,23 +713,54 @@
  */
 $(document).ready(function () {
     $("#searchCustomer").typeahead({
-        source: function (query, result) {
+        source: function (query, process) {
+
+            var that = this;
             $.ajax({
                 url: "../classes/API/ajax/ajaxCallTypeahead.php",
-                method: "POST",
+                type: "POST",
                 data:{query:query},
-                dataType: "json",
-                success:function (data) {
-                    result($.map(data, function (item) {
-                        // return "<a href='" + item.href + "'>" + item + "</a>";
-                        return item;
-                    }));
+                dataType: 'JSON',
+                async: true,
+
+                beforeSend: function() {
+                    //that.$element is a variable that stores the element the plugin was called on
+                    that.$element.addClass('loading');
+                },
+
+                complete: function() {
+                    that.$element.removeClass('loading');
+                },
+
+                success: function(data){
+                    var resultList = data.map(function (item) {
+                        var link = { href: item.href, name: item.name };
+                        return JSON.stringify(link);
+                    });
+                    return process(resultList);
                 }
             })
         },
-        item: '<a class="dropdown-item" href="index.html?customerId=0" role="option"><li></li></a>',
-        headerHtml: '<li class="dropdown-header"></li>',
-        headerDivider: '<li class="divider" role="separator"></li>',
-        itemContentSelector:'li'
+        sorter: function (items) {
+            var beginswith = [], caseSensitive = [], caseInsensitive = [], item;
+            while (link = items.shift()) {
+                var item = JSON.parse(link);
+                if (!item.name.toLowerCase().indexOf(this.query.toLowerCase())) beginswith.push(JSON.stringify(item));
+                else if (item.name.indexOf(this.query)) caseSensitive.push(JSON.stringify(item));
+                else caseInsensitive.push(JSON.stringify(item));
+            }
+            return beginswith.concat(caseSensitive, caseInsensitive)
+        },
+        highlighter: function (link) {
+            var item = JSON.parse(link);
+            var query = this.query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&');
+            return item.name.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+                return '<strong>' + match + '</strong>'
+            })
+        },
+        updater: function (link) {
+            var item = JSON.parse(link);
+            location.href=item.href;
+        }
     });
 });

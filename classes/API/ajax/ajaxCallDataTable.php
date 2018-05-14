@@ -7,7 +7,7 @@ use API\CallAPI;
 
 $request = $_REQUEST;
 $col = [
-    0 => 'id',
+    0 => 'serviceID',
     1 => 'name',
     2 => 'project',
     3 => 'plancare_version'
@@ -16,20 +16,20 @@ $col = [
 $api = new CallAPI;
 $responseHeaders = $api->getServices()[0];
 
+// Order data
+$sort = "sort".ucfirst($request['order'][0]['dir']);
+$result = $api->getServices(($_POST['customerId'] == 0 ? "?" : "?projects.customerID=" . $_POST['customerId']) . "&limit=" . $request['length'] . "&offset=".$request['start'] . "&$sort=plancare_services." . $col[$request['order'][0]['column']]);
+$services = $result["body"];
+$pos = intval(strpos($result['headers'][13],":")) + 1;
+$resultNum = intval(substr($result['headers'][13], $pos));
+
 // Search data
 if(!empty($request['search']['value'])){
-    $result = $api->getServices("?id*=". $request['search']['value'] . ",name*=" . $request['search']['value'] . ",project*=" . $request['search']['value']);
+    $result = $api->getServices("?id,name,project*=" . $request['search']['value']);
     $services = $result["body"];
     $pos = intval(strpos($result['headers'][13],":")) + 1;
     $resultNum = intval(substr($result['headers'][13], $pos));
 }
-
-// Order data
-$sort = "sort".ucfirst($request['order'][0]['dir']);
-$result = $api->getServices(($_POST['customerId'] == 0 ? "?" : "?projects.customerID=" . $_POST['customerId']) . "&limit=" . $request['length'] . "&offset=".$request['start'] /*. "&$sort=" . $col[$request['order'][0]['column']]*/);
-$services = $result["body"];
-$pos = intval(strpos($result['headers'][13],":")) + 1;
-$resultNum = intval(substr($result['headers'][13], $pos));
 
 $data = array();
 
@@ -51,7 +51,6 @@ $json_data = array(
     "recordsTotal"      => intval($resultNum),
     "recordsFiltered"   => intval($resultFilter),
     "data"              => $data
-
 );
 
 echo json_encode($json_data);
