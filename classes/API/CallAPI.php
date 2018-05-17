@@ -11,10 +11,12 @@ class CallAPI
      *
      * @param $curl
      */
-    protected function headers($curl)
+    public function headers($curl)
     {
-//        $token = $this->authorization($curl);
-        $token = "207.658313.1526336515.dd489a4b4d63ca760659586cf7b019a255319e7e48c56fc2139e26514f45f87d";
+//        echo memory_get_usage();
+//        echo "<br>";
+//        $token = $this->authorization()["body"]["token"];
+        $token = "207.658313.1526569268.3410dd2103f40433650558b5e305ed92efa147718be96e575140cc6ea00b7baf";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -30,10 +32,10 @@ class CallAPI
      * @param $curl
      * @return array|mixed
      */
-    protected function authorization($curl)
+    public function authorization()
     {
         $data = [
-            "refreshToken" => "PFANJeVTP9afgPMFDxME1pphUWmak0eqhwzxE6nXEV1n9tpwaqB7HJtcS8jTGSve"
+            "refreshToken" => "DRfVSY5PBw0c5dZe7Uc1a2ZS2fMy6tsgRC6xhTn3uzwM6LTLgqhPjJ2v0ggG0x7w"
         ];
 
         $result = $this->apiCall("POST", "/api/createAuthTokenFromRefreshToken", $data);

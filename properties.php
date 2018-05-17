@@ -4,7 +4,7 @@ namespace formHandlers;
 use \API\CallAPI;
 
 session_start();
-include "autoload.php";
+include "core/init.php";
 
 ?><!DOCTYPE html>
 <html>

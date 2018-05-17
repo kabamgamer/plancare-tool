@@ -1,7 +1,7 @@
 <?php
 namespace API\ajax;
 
-require "../../../autoload.php";
+require "../../../core/init.php";
 
 use API\CallAPI;
 

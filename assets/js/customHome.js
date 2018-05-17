@@ -76,7 +76,7 @@ $(function() {
             var i;
 
             button.setAttribute("disabled", "disabled");
-            body.classList.add("wait");
+            button.classList.add("loading");
 
             form.submit();
         }

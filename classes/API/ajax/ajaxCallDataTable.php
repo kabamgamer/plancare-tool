@@ -1,7 +1,7 @@
 <?php
 namespace API\ajax;
 
-require "../../../autoload.php";
+require "../../../core/init.php";
 
 use API\CallAPI;
 
@@ -25,7 +25,7 @@ $resultNum = intval(substr($result['headers'][13], $pos));
 
 // Search data
 if(!empty($request['search']['value'])){
-    $result = $api->getServices("?id,name,project*=" . $request['search']['value']);
+    $result = $api->getServices("?id,name,plancare_version*=" . $request['search']['value']);
     $services = $result["body"];
     $pos = intval(strpos($result['headers'][13],":")) + 1;
     $resultNum = intval(substr($result['headers'][13], $pos));

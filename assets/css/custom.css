@@ -107,9 +107,6 @@ form .error {
 form .error:focus{
     box-shadow: 0 0 0 0.2rem rgba(255,0,0,.25) !important;
 }
-.wait *{
-    cursor: wait !important;
-}
 
 /* Input Styles */
 .loading {
@@ -118,4 +115,12 @@ form .error:focus{
     background-size: 25px 25px;
     background-position:right center;
     background-repeat: no-repeat;
+}
+#submit-button.loading {
+    background-image: url("http://loadinggif.com/images/image-selection/3.gif");
+    background-size: 25px 25px;
+    background-position:right center;
+    background-repeat: no-repeat;
+    width: 125px;
+    text-align: left;
 }

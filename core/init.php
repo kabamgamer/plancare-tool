@@ -1,5 +1,6 @@
 <?php
 
+// Autoloader
 spl_autoload_register(function ($class){
     $filename = $class.'.php';
 

@@ -2,15 +2,23 @@
 namespace formHandlers;
 
 use \API\CallAPI;
+use errorHandlers\HttpErrors;
 
 session_start();
-include "autoload.php";
+include "core/init.php";
 
-if(!isset($_GET["customerId"])){
+if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
     header("Location: index.php?customerId=0");
 } else {
     $customers = new CallAPI;
-    $customer = $customers->getCustomers($_GET["customerId"])["body"]["name"];
+    $customer = $customers->getCustomers($_GET["customerId"]);
+    $customerStatus = new HttpErrors($customer["headers"][0]);
+
+    if ($customerStatus->passed()) {
+        $customerName = $customer["body"]["name"];
+    } else {
+
+    }
 }
 
 ?><!DOCTYPE html>
@@ -121,7 +129,7 @@ if(!isset($_GET["customerId"])){
     </script>
     <?php } ?>
 
-    <p><i><?= $customer ?></i></p>
+    <p><i><?= $customerName ?></i></p>
 
     <h2>Alle PlanCare services</h2>
 
