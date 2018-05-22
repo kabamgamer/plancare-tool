@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e9454da-2baa-4e50-9414-514d6f5b9c75" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/assets/js/customHome.js" afterPath="$PROJECT_DIR$/assets/js/customHome.js" />
       <change beforePath="$PROJECT_DIR$/classes/API/CallAPI.php" afterPath="$PROJECT_DIR$/classes/API/CallAPI.php" />
-      <change beforePath="$PROJECT_DIR$/classes/API/ajax/ajaxCallDataTable.php" afterPath="$PROJECT_DIR$/classes/API/ajax/ajaxCallDataTable.php" />
-      <change beforePath="$PROJECT_DIR$/classes/errorHandlers/HttpErrors.php" afterPath="$PROJECT_DIR$/classes/errorHandlers/HttpErrors.php" />
-      <change beforePath="$PROJECT_DIR$/properties.php" afterPath="$PROJECT_DIR$/properties.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,7 +32,7 @@
         <entry file="file://$PROJECT_DIR$/classes/API/CallAPI.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="483">
-              <caret line="142" column="55" lean-forward="false" selection-start-line="142" selection-start-column="55" selection-end-line="142" selection-end-column="55" />
+              <caret line="142" column="36" lean-forward="true" selection-start-line="142" selection-start-column="36" selection-end-line="142" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -263,12 +258,12 @@
       <workItem from="1526278133259" duration="26447000" />
       <workItem from="1526368232257" duration="9477000" />
       <workItem from="1526538081360" duration="20948000" />
-      <workItem from="1526972614130" duration="17893000" />
+      <workItem from="1526972614130" duration="18299000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="312195000" />
+    <option name="totallyTimeSpent" value="312601000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -519,7 +514,7 @@
     <entry file="file://$PROJECT_DIR$/classes/API/CallAPI.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
-          <caret line="142" column="55" lean-forward="false" selection-start-line="142" selection-start-column="55" selection-end-line="142" selection-end-column="55" />
+          <caret line="142" column="36" lean-forward="true" selection-start-line="142" selection-start-column="36" selection-end-line="142" selection-end-column="36" />
           <folding />
         </state>
       </provider>

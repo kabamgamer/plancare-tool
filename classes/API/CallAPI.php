@@ -140,7 +140,7 @@ class CallAPI
     }
     public function getService($request)
     {
-        return $this->apiCall("GET", "/plancareServices/$request");
+        return $this->apiCall("GET", "/plancareService/$request");
     }
     public function postService($data)
     {
