@@ -16,7 +16,7 @@ class CallAPI
 //        echo memory_get_usage();
 //        echo "<br>";
 //        $token = $this->authorization()["body"]["token"];
-        $token = "207.658313.1527003927.32a5f6534bf925a6771b86f6eb7c6da8a4ff18672de3a16f87131c1b1593c269";
+        $token = "207.658313.1527027712.bd092fd97adc729b40b5c4b6848aea01207ca38a418d1125aa58696e3901b014";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
