@@ -1,6 +1,6 @@
 // Hide error/success messages after 5 seconds
 setTimeout(function(){
-    document.getElementById('hide').style.display = 'none';
+    $(document.getElementById('hide')).css('display', 'none');
     document.getElementById('hide').innerHTML = '';
 }, 5000);
 
@@ -44,15 +44,32 @@ $(document).ready( function () {
             data: {
                 customerId: customerId
             }
-        }
-        ,columnDefs: [{
+        },
+        initComplete : function( settings, json){
+            var jsonData = json.data[0];
+
+            if(jsonData.length === 1) {
+                var error = document.getElementsByClassName("sorting_1");
+                var td = document.getElementsByTagName("TD");
+
+                $(error).attr('colspan', 5);
+                $(error).css('text-align', 'center');
+                $(td[1]).css('display', 'none');
+                $(td[2]).css('display', 'none');
+                $(td[3]).css('display', 'none');
+                $(td[4]).css('display', 'none');
+            } else {
+                console.log("Data opgehaald");
+            }
+        },
+        columnDefs: [{
             "defaultContent": "-",
             "targets": "_all"
         }]
     });
 } );
 
-/**custo
+/**
  * Form validation addServices
  */
 $(function() {
@@ -82,11 +99,16 @@ $(function() {
         }
     });
 
-    // Autocomplete
     $("#serviceName").focus(function () {
         var customer = $("#customer").val();
         var type = $("#type").val().substring(0, 4).toUpperCase();
 
+        // Redirecting
+        if(!customer) {
+            window.location.assign("index.php");
+        }
+
+        // Autocomplete
         if(customer && type && !this.value) {
             this.value = customer + "/" + type;
         }

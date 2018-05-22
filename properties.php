@@ -2,6 +2,7 @@
 namespace formHandlers;
 
 use \API\CallAPI;
+use \errorHandlers\HttpErrors;
 
 session_start();
 include "core/init.php";
@@ -87,7 +88,13 @@ include "core/init.php";
     <?php
         $serviceId = $_GET["serviceId"];
         $result = new CallAPI;
-        $result = $result->getService($serviceId)["body"];
+        $service = $result->getService($serviceId);
+        $httpCheck = new HttpErrors($service["headers"][0]);
+        $result = $service["body"];
+
+        if (!$httpCheck->passed()) {
+            echo "<div class='alert alert-danger container' id='hide'>" . $httpCheck->message() . "</div>";
+        }
     ?>
 
     <!-- Form -->
