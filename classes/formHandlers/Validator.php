@@ -52,6 +52,11 @@ class Validator
                             $this->addError("{$name} mag alleen de karakters \" {$rule_value} \" bevatten.");
                         }
                     break;
+                    case "notMatch":
+                        if ($value == $rule_value) {
+                            $this->addError("{$name} is verplicht.");
+                        }
+                    break;
                 }
             }
         }

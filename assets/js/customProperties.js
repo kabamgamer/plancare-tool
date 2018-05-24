@@ -1,14 +1,33 @@
 // Hide error/success messages after 5 seconds
-setTimeout(function(){
-    document.getElementById('hide').style.display = 'none';
-    document.getElementById('hide').innerHTML = '';
-}, 5000);
+$('#hide').delay(5000).fadeOut(500);
 
 /**
- * Form validation putServices
+ * Form validations
  */
 $(function() {
-    $("#putService").validate({
+        $("#creatCustomer").validate({
+            rules: {
+                customerName: {
+                    required: true
+                }
+            },
+            messages: {
+                customerName: {
+                    required: ""
+                }
+            },
+
+            submitHandler: function(form) {
+                var button = document.getElementById("submitCustomer");
+
+                button.setAttribute("disabled", "disabled");
+                button.classList.add("loading");
+
+                form.submit();
+            }
+        });
+
+        $("#putService").validate({
         rules: {
             rest_service_address: {
                 required: true

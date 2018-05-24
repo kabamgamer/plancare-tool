@@ -26,7 +26,7 @@ $resultNum = intval(substr($result['headers'][13], $pos));
 
 // Search data
 if(!empty($request['search']['value'])){
-    $result = $api->getServices(($_POST['customerId'] == 0 ? "?" : "?projects.customerID=" . $_POST['customerId']) . "?id,name,plancare_version*=" . $request['search']['value']);
+    $result = $api->getServices(($_POST['customerId'] == 0 ? "?" : "?projects.customerID=" . $_POST['customerId']) . "&id,name,plancare_version*=" . $request['search']['value']. "&limit=" . $request['length'] . "&offset=".$request['start'] . "&$sort=plancare_services." . $col[$request['order'][0]['column']]);
     $services = $result["body"];
     $pos = intval(strpos($result['headers'][13],":")) + 1;
     $resultNum = intval(substr($result['headers'][13], $pos));

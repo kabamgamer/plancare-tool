@@ -108,7 +108,7 @@ form .error:focus{
     box-shadow: 0 0 0 0.2rem rgba(255,0,0,.25) !important;
 }
 
-/* Input Styles */
+/* Loading Styles */
 .loading {
     background-color: #ffffff;
     background-image: url("http://loadinggif.com/images/image-selection/3.gif");
@@ -116,11 +116,22 @@ form .error:focus{
     background-position:right center;
     background-repeat: no-repeat;
 }
-#submit-button.loading {
+#submit-button.loading, #submitCustomer.loading {
     background-image: url("http://loadinggif.com/images/image-selection/3.gif");
     background-size: 25px 25px;
     background-position:right center;
     background-repeat: no-repeat;
     width: 125px;
     text-align: left;
+}
+.dataTables_wrapper .dataTables_processing {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    height: 80px;
+    left: 50%;
+    width: 100%;
+    font-size: 1.3em;
+    background: #fff;
+    background: radial-gradient(#fff, rgba(255,255,255,0.8));
 }

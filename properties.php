@@ -68,6 +68,38 @@ include "core/init.php";
         }
     }
 
+    /**
+     * Validate PostCustomer
+     */
+    if (isset($_POST["submitCustomer"])) {
+        if (Input::exists()) {
+            $validate = new Validator;
+            $validation = $validate->check($_POST, [
+                "customerName" => [
+                    "name" => "Klant naam",
+                    "isRequired" => true,
+                    "minLength" => 2
+                ]
+            ]);
+
+            if ($validation->passed("Klant succesvol aangemaakt!")) {
+                $api = new CallAPI;
+
+                $data = array(
+                    "name" => $_POST["customerName"]
+                );
+
+                if ($api->postCustomer($data)) {
+                    echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+                }
+            } else {
+                foreach ($validate->errors() as $error) {
+                    echo "<div class='alert alert-danger container' id='hide'> {$error} </div>";
+                }
+            }
+        }
+    }
+
 
     $version = "";
     if(isset($_POST["getVersion"])) {
@@ -76,10 +108,13 @@ include "core/init.php";
             $version = $api->getVersion($_GET["serviceId"]);
         } else {
             $version = "";
+            echo "<div class='alert alert-danger container' id='hide'>Kon versienummer niet ophalen. Mogelijk is er een fout in de configuratie van de service.</div>";
         }
     }
 ?>
+
 <a href="index.php?customerId=<?= $_GET['customerId'] ?>"><button class="btn btn-back">❮ Terug</button></a>
+
 <div class="container">
     <h2>Eigenschappen</h2>
 
@@ -93,7 +128,7 @@ include "core/init.php";
         $result = $service["body"];
 
         if (!$httpCheck->passed()) {
-            echo "<div class='alert alert-danger container' id='hide'>" . $httpCheck->message() . "</div>";
+            echo "<div class='alert alert-danger container'>" . $httpCheck->message() . "</div>";
         }
     ?>
 

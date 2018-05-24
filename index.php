@@ -10,14 +10,18 @@ include "core/init.php";
 if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
     header("Location: index.php?customerId=0");
 } else {
-    $customers = new CallAPI;
-    $customer = $customers->getCustomers($_GET["customerId"]);
-    $customerStatus = new HttpErrors($customer["headers"][0]);
+    if($_GET["customerId"] != 0){
+        $customers = new CallAPI;
+        $customer = $customers->getCustomers($_GET["customerId"]);
+        $customerStatus = new HttpErrors($customer["headers"][0]);
 
-    if ($customerStatus->passed()) {
-        $customerName = $customer["body"]["name"];
-    } else {
+        if ($customerStatus->passed()) {
+            $customerName = $customer["body"]["name"];
+        } else {
+            $customerError = "<div class='alert alert-danger'>" . $customerStatus->message() . "</div>";
+        }
 
+        include "includes/modal.inc.php";
     }
 }
 
@@ -51,7 +55,7 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
                     "name" => "Service naam",
                     "isRequired" => true,
                     "minLength" => 2,
-                    "matchChars" => "a-zA-Z0-9 \/"
+                    "matchChars" => "a-zA-Z0-9! \/"
                 ]
             ));
 
@@ -77,7 +81,7 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
     /**
      * Validate PostCustomer
      */
-    if (isset($_POST["postCustomer"])) {
+    if (isset($_POST["submitCustomer"])) {
         if (Input::exists()) {
             $validate = new Validator;
             $validation = $validate->check($_POST, [
@@ -95,8 +99,16 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
                     "name" => $_POST["customerName"]
                 );
 
-                if ($api->postCustomer($data)) {
+                $newCustomer = $api->postCustomer($data);
+
+                if (!array_key_exists("error_code", $newCustomer)) {
                     echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+                } else {
+                    if($newCustomer["error_code"] == 38) {
+                        echo "<div class='alert alert-danger container' id='hide'>Klantnaam is al in gebruik.</div>";
+                    } else {
+                        echo "<div class='alert alert-danger container' id='hide'>Kon klant niet toevoegen wegens een onbekende fout.</div>";
+                    }
                 }
             } else {
                 foreach ($validate->errors() as $error) {
@@ -111,7 +123,13 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
 <div class="container">
 
     <!-- New Service -->
-    <?php if(isset($_GET["customerId"]) && $_GET["customerId"] != 0){ ?>
+    <?php
+    if(isset($customerError)) {
+        echo $customerError;
+    }
+
+    if(isset($_GET["customerId"]) && $_GET["customerId"] != 0){
+    ?>
 
     <div class="row">
         <div class="col-md-8 col-sm-8">
@@ -145,7 +163,7 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
         </tr>
         </thead>
     </table>
-    <?php include "includes/modal.inc.php";?>
+
 
 </div>
 

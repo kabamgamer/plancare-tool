@@ -24,9 +24,9 @@ class Input
     public static function get($item)
     {
         if(isset($_POST[$item])){
-            return $_POST[$item];
+            return htmlspecialchars($_POST[$item]);
         } elseif($_GET[$item]) {
-            return $_GET[$item];
+            return htmlspecialchars($_GET[$item]);
         } else{
             return '';
         }

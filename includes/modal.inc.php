@@ -28,7 +28,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" id="submit-button" class="btn btn-primary" name="submitServicePost" value="Toevoegen">
+                    <input type="submit" id="submit-button" class="btn btn-primary" name="submitServicePost" disabled value="Toevoegen">
                 </div>
             </form>
         </div>

@@ -13,10 +13,8 @@ class CallAPI
      */
     public function headers($curl)
     {
-//        echo memory_get_usage();
-//        echo "<br>";
 //        $token = $this->authorization()["body"]["token"];
-        $token = "207.658313.1527027712.bd092fd97adc729b40b5c4b6848aea01207ca38a418d1125aa58696e3901b014";
+        $token = "207.658313.1527605652.3e7c18f281b7889d429f59668776d09b1de048040a8447d46f7d842b5a0d3df2";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -34,9 +32,9 @@ class CallAPI
      */
     public function authorization()
     {
-        $data = [
-            "refreshToken" => "DRfVSY5PBw0c5dZe7Uc1a2ZS2fMy6tsgRC6xhTn3uzwM6LTLgqhPjJ2v0ggG0x7w"
-        ];
+        $data = array(
+            "refreshToken" => "MB2vKtRyGX3fsNKzSG7J6qLUC7ZJWweBl85pPSQxEVYMBDlF9jNP8mwzclDTmnnF"
+        );
 
         $result = $this->apiCall("POST", "/api/createAuthTokenFromRefreshToken", $data);
 
@@ -140,7 +138,7 @@ class CallAPI
     }
     public function getService($request)
     {
-        return $this->apiCall("GET", "/plancareService/$request");
+        return $this->apiCall("GET", "/plancareServices/$request");
     }
     public function postService($data)
     {

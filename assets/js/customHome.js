@@ -1,8 +1,5 @@
 // Hide error/success messages after 5 seconds
-setTimeout(function(){
-    $(document.getElementById('hide')).css('display', 'none');
-    document.getElementById('hide').innerHTML = '';
-}, 5000);
+$('#hide').delay(5000).fadeOut(500);
 
 /**
  * Datatable config
@@ -10,14 +7,23 @@ setTimeout(function(){
 $(document).ready( function () {
     var path = window.location.search;
     var index = path.indexOf("=");
+    var and = path.indexOf("&");
     var customerId = path.substring(index+1);
 
+    if(and !== null && and !== -1) {
+        customerId = path.substring(and, index+1);
+    }
 
     $('#services').DataTable({
         processing: true,
         serverSide: true,
+        lengthMenu: [
+            [10, 25, 50],
+            [10, 25, 50]
+        ],
         language: {
             sLengthMenu: "_MENU_ resultaten weergeven",
+            sProcessing: "PlanCare services ophalen &nbsp<img src=\"http://loadinggif.com/images/image-selection/3.gif\" height='40px'>",
             sZeroRecords: "Kies eerst een klant.",
             sInfo: "_START_ tot _END_ van _TOTAL_ resultaten",
             sInfoEmpty: "Geen resultaten om weer te geven",
@@ -48,6 +54,8 @@ $(document).ready( function () {
         initComplete : function( settings, json){
             var jsonData = json.data[0];
 
+            $('div.loading').remove();
+
             if(jsonData.length === 1) {
                 var error = document.getElementsByClassName("sorting_1");
                 var td = document.getElementsByTagName("TD");
@@ -58,9 +66,10 @@ $(document).ready( function () {
                 $(td[2]).css('display', 'none');
                 $(td[3]).css('display', 'none');
                 $(td[4]).css('display', 'none');
-            } else {
-                console.log("Data opgehaald");
             }
+        },
+        drawCallback: function( settings ) {
+            $(document.getElementById('services_processing')).css('display', 'none');
         },
         columnDefs: [{
             "defaultContent": "-",
@@ -70,9 +79,32 @@ $(document).ready( function () {
 } );
 
 /**
- * Form validation addServices
+ * Form validations
  */
 $(function() {
+    $("#creatCustomer").validate({
+        rules: {
+            customerName: {
+                required: true
+            }
+        },
+        messages: {
+            customerName: {
+                required: ""
+            }
+        },
+
+        submitHandler: function(form) {
+            var button = document.getElementById("submitCustomer");
+
+            button.setAttribute("disabled", "disabled");
+            button.classList.add("loading");
+
+            form.submit();
+        }
+    });
+
+    // Validate Services
     $("#addService").validate({
         rules: {
             serviceName: {
@@ -112,10 +144,15 @@ $(function() {
         if(customer && type && !this.value) {
             this.value = customer + "/" + type;
         }
-    })
+
+        if($("#addService").valid())
+        {
+            $("#submit-button").removeAttr("disabled");
+        }
+    });
 });
 
 // Custom validator
 jQuery.validator.addMethod("serviceNameChars", function (value, element) {
-    return this.optional(element) || /^[a-zA-Z0-9,\/ ]*$/.test(value);
+    return this.optional(element) || /^[a-zA-Z0-9,\/! ]*$/.test(value);
 }, "Dit veld mag alleen hoofdletters, kleine letters, cijfers, komma, voorwaardse slash en spaties bevatten.");
