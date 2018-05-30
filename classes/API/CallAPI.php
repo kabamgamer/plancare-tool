@@ -14,7 +14,7 @@ class CallAPI
     public function headers($curl)
     {
 //        $token = $this->authorization()["body"]["token"];
-        $token = "207.658313.1527605652.3e7c18f281b7889d429f59668776d09b1de048040a8447d46f7d842b5a0d3df2";
+        $token = "207.658313.1527697607.358942c6cd4b7844305a0a8a609af1e6c4de0061ec866e9558d6039153d86f6f";
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
