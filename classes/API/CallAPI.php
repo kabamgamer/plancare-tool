@@ -4,7 +4,16 @@ namespace API;
 
 class CallAPI
 {
-    const URI = 'https://api-dev2.tapster.nl/v1';
+    private $_DotENV,
+            $_URI;
+
+    public function __construct()
+    {
+        $this->_DotENV = new \Dotenv\Dotenv(__DIR__);
+        $this->_DotENV->load();
+
+        $this->_URI = $_ENV["API_URI"];
+    }
 
     /**
      * Get headers
@@ -14,7 +23,7 @@ class CallAPI
     public function headers($curl)
     {
 //        $token = $this->authorization()["body"]["token"];
-        $token = "207.658313.1527697607.358942c6cd4b7844305a0a8a609af1e6c4de0061ec866e9558d6039153d86f6f";
+        $token = $_COOKIE["accessToken"];
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -33,7 +42,7 @@ class CallAPI
     public function authorization()
     {
         $data = array(
-            "refreshToken" => "MB2vKtRyGX3fsNKzSG7J6qLUC7ZJWweBl85pPSQxEVYMBDlF9jNP8mwzclDTmnnF"
+            "refreshToken" => "7mQlzp4s1D5s6Jv1qyBda1JtuS7tXUdKXeMvJ8rgKUnucNmX9XLzMPcSdqDxyg7M"
         );
 
         $result = $this->apiCall("POST", "/api/createAuthTokenFromRefreshToken", $data);
@@ -80,7 +89,7 @@ class CallAPI
      */
     private function apiCall($method, $url, $data = false)
     {
-        $url = (self::URI . $url);
+        $url = ($this->_URI . $url);
 
         $curl = curl_init();
 
@@ -98,6 +107,7 @@ class CallAPI
 
         $response = curl_exec($curl);
 
+        // Separate headers from body
         $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
         $headers = substr($response, 0, $header_size);
         $header = explode("\n", $headers);
