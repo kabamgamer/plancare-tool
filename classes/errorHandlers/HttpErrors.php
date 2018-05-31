@@ -26,6 +26,8 @@ class HttpErrors
                     break;
                     case "401":
                         $this->addMessage("U bent niet bevoegd om deze aanvraag te doen.");
+                        header("Location: https://inloggen.tapcare.nl/domain/arnoud.plancareweb.nl?returnUri=localhost:8080");
+                        exit;
                     break;
                     case "403":
                         $this->addMessage("U bent niet bevoegd om een aanvraag te doen op dit pad.");

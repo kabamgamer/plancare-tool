@@ -14,7 +14,7 @@ class CallAPI
     public function headers($curl)
     {
 //        $token = $this->authorization()["body"]["token"];
-        $token = "207.658313.1527605652.3e7c18f281b7889d429f59668776d09b1de048040a8447d46f7d842b5a0d3df2";
+        $token = $_COOKIE["accessToken"];
 
         $headers   = array();
         $headers[] = "Content-type: application/json";
@@ -33,7 +33,7 @@ class CallAPI
     public function authorization()
     {
         $data = array(
-            "refreshToken" => "MB2vKtRyGX3fsNKzSG7J6qLUC7ZJWweBl85pPSQxEVYMBDlF9jNP8mwzclDTmnnF"
+            "refreshToken" => "7mQlzp4s1D5s6Jv1qyBda1JtuS7tXUdKXeMvJ8rgKUnucNmX9XLzMPcSdqDxyg7M"
         );
 
         $result = $this->apiCall("POST", "/api/createAuthTokenFromRefreshToken", $data);
@@ -98,6 +98,7 @@ class CallAPI
 
         $response = curl_exec($curl);
 
+        // Separate headers from body
         $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
         $headers = substr($response, 0, $header_size);
         $header = explode("\n", $headers);
