@@ -4,7 +4,16 @@ namespace API;
 
 class CallAPI
 {
-    const URI = 'https://api-dev2.tapster.nl/v1';
+    private $_DotENV,
+            $_URI;
+
+    public function __construct()
+    {
+        $this->_DotENV = new \Dotenv\Dotenv(__DIR__);
+        $this->_DotENV->load();
+
+        $this->_URI = $_ENV["API_URI"];
+    }
 
     /**
      * Get headers
@@ -80,7 +89,7 @@ class CallAPI
      */
     private function apiCall($method, $url, $data = false)
     {
-        $url = (self::URI . $url);
+        $url = ($this->_URI . $url);
 
         $curl = curl_init();
 

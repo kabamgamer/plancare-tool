@@ -1,12 +1,18 @@
 <?php
 namespace formHandlers;
 
-use \API\CallAPI;
-use \errorHandlers\HttpErrors;
+use \API\CallAPI,
+    \errorHandlers\HttpErrors;
 
 session_start();
 include "core/init.php";
 
+$dotenv = new \Dotenv\Dotenv(__DIR__);
+var_dump($dotenv->load());
+
+echo "<br>";
+
+var_dump($_ENV["API_URL"]);
 ?><!DOCTYPE html>
 <html>
 <head>
