@@ -6,8 +6,6 @@ use \API\CallAPI,
 
 session_start();
 include "core/init.php";
-
-echo getcwd();
 ?><!DOCTYPE html>
 <html>
 <head>
