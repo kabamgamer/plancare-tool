@@ -9,7 +9,7 @@ class CallAPI
 
     public function __construct()
     {
-        $this->_DotENV = new \Dotenv\Dotenv(__DIR__);
+        $this->_DotENV = new \Dotenv\Dotenv(ROOT);
         $this->_DotENV->load();
 
         $this->_URI = $_ENV["API_URI"];

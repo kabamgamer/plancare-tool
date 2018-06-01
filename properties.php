@@ -7,12 +7,7 @@ use \API\CallAPI,
 session_start();
 include "core/init.php";
 
-$dotenv = new \Dotenv\Dotenv(__DIR__);
-var_dump($dotenv->load());
-
-echo "<br>";
-
-var_dump($_ENV["API_URL"]);
+echo getcwd();
 ?><!DOCTYPE html>
 <html>
 <head>
