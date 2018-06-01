@@ -11,4 +11,4 @@ At first, create a .env file. You can download a .env.example from https://lankh
 
 $ docker cp ./.env plancare-implementationtool:/var/www/html/.env
 
-Now go to localhost:8000 and see the app running.
+Now go to localhost:8000, login and see the app running.

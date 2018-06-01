@@ -731,13 +731,15 @@ $(document).ready(function () {
                 complete: function() {
                     that.$element.removeClass('loading');
                 },
-
                 success: function(data){
                     var resultList = data.map(function (item) {
                         var link = { href: item.href, name: item.name };
                         return JSON.stringify(link);
                     });
                     return process(resultList);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert("U beschikt niet over de juiste rechten om deze aanvraag te doen. Neem contact op met uw systeembeheerder!");
                 }
             })
         },

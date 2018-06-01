@@ -13,8 +13,7 @@
                     <a class="dropdown-item <?= ($_GET['customerId'] == 0 ? 'active' : '') ?>" href="index.php?customerId=0">Alle Services</a>
                     <div class="dropdown-divider"></div>
                     <div class="form-group">
-                        <label class="px-4" for="searchCustomer">Zoek klant</label>
-                        <input type="search" placeholder="Zoeken" class="form-control" id="searchCustomer" name="searchCustomer" autocomplete="off">
+                        <input type="search" placeholder="Zoek Klant" class="form-control" id="searchCustomer" name="searchCustomer" autocomplete="off">
                     </div>
                 </div>
             </li>

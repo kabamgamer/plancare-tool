@@ -67,8 +67,12 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
                     "name" => $_POST["serviceName"]
                 );
 
-                if ($api->postService($data)) {
+                $request = $api->postService($data);
+
+                if ($request) {
                     echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+                } else {
+                    echo "<div class='alert alert-success container' id='hide'>Er ging iets fout met het aanmaken van een PlanCare service.</div>";
                 }
             } else {
                 foreach ($validate->errors() as $error) {
@@ -101,15 +105,26 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
 
                 $newCustomer = $api->postCustomer($data);
 
-                if (!array_key_exists("error_code", $newCustomer)) {
-                    echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
-                } else {
-                    if($newCustomer["error_code"] == 38) {
-                        echo "<div class='alert alert-danger container' id='hide'>Klantnaam is al in gebruik.</div>";
+                if ($newCustomer !== NULL) {
+                    if (!array_key_exists("error_code", $newCustomer)) {
+                        echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
                     } else {
-                        echo "<div class='alert alert-danger container' id='hide'>Kon klant niet toevoegen wegens een onbekende fout.</div>";
+                        switch ($newCustomer["error_code"]) {
+                            case "38":
+                                echo "<div class='alert alert-danger container' id='hide'>Klantnaam is al in gebruik.</div>";
+                            break;
+                            case "114":
+                                echo "<div class='alert alert-danger container' id='hide'>U bent niet bevoegd deze aanvraag te doen. Neem contact op met uw systeembeheerder.</div>";
+                            break;
+                            default:
+                                echo "<div class='alert alert-danger container' id='hide'>Kon klant niet toevoegen wegens een onbekende fout.</div>";
+                            break;
+                        }
                     }
+                } else {
+                    echo "<div class='alert alert-danger container' id='hide'>Klantnaam is al in gebruik.</div>";
                 }
+
             } else {
                 foreach ($validate->errors() as $error) {
                     echo "<div class='alert alert-danger container' id='hide'> {$error} </div>";
@@ -179,3 +194,5 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
 <script src="assets/js/customHome.js"></script>
 
 </html>
+
+<?php

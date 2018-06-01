@@ -2,6 +2,8 @@
 
 namespace API;
 
+use \Cookie;
+
 class CallAPI
 {
     private $_DotENV,
@@ -23,7 +25,7 @@ class CallAPI
     public function headers($curl)
     {
 //        $token = $this->authorization()["body"]["token"];
-        $token = $_COOKIE["accessToken"];
+        $token = Cookie::get("accessToken");
 
         $headers   = array();
         $headers[] = "Content-type: application/json";

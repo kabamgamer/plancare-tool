@@ -88,9 +88,28 @@ include "core/init.php";
                     "name" => $_POST["customerName"]
                 );
 
-                if ($api->postCustomer($data)) {
-                    echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+                $newCustomer = $api->postCustomer($data);
+
+                if ($newCustomer !== NULL) {
+                    if (!array_key_exists("error_code", $newCustomer)) {
+                        echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
+                    } else {
+                        switch ($newCustomer["error_code"]) {
+                            case "38":
+                                echo "<div class='alert alert-danger container' id='hide'>Klantnaam is al in gebruik.</div>";
+                            break;
+                            case "114":
+                                echo "<div class='alert alert-danger container' id='hide'>U bent niet bevoegd deze aanvraag te doen. Neem contact op met uw systeembeheerder.</div>";
+                            break;
+                            default:
+                                echo "<div class='alert alert-danger container' id='hide'>Kon klant niet toevoegen wegens een onbekende fout.</div>";
+                            break;
+                        }
+                    }
+                } else {
+                    echo "<div class='alert alert-danger container' id='hide'>Klantnaam is al in gebruik.</div>";
                 }
+
             } else {
                 foreach ($validate->errors() as $error) {
                     echo "<div class='alert alert-danger container' id='hide'> {$error} </div>";

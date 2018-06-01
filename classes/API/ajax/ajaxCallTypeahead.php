@@ -4,11 +4,15 @@ namespace API\ajax;
 require "../../../core/init.php";
 
 use API\CallAPI;
+use errorHandlers\HttpErrors;
 
 $request = $_POST["query"];
 
 $api = new CallAPI;
-$customers = $api->getCustomers("?name*=".$request."&limit=8")["body"];
+$result = $api->getCustomers("?name*=".$request."&limit=8");
+$customers = $result["body"];
+
+$httpCheck = new HttpErrors($result["headers"][0]);
 
 $data = array();
 
@@ -20,5 +24,6 @@ if (count($customers) > 0) {
             "href"=>"index.php?customerId=".$customer['id']
         ];
     }
-    echo json_encode($data);
 }
+
+echo json_encode($data);
