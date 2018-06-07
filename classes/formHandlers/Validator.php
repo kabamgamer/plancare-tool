@@ -12,8 +12,8 @@ class Validator
     /**
      * Set rules for validate
      *
-     * @param $source
-     * @param array $items
+     * @param $source       = POST|GET
+     * @param array $items  = Rules
      *
      * @return $this
      */
@@ -72,12 +72,18 @@ class Validator
     /**
      * Add errors to error array
      *
-     * @param $error
+     * @param string $error = message to display
      */
     private function addError($error)
     {
         $this->errors[] = $error;
     }
+
+    /**
+     * Return ALL error messages
+     *
+     * @return array
+     */
     public function errors()
     {
         return $this->errors;
@@ -92,6 +98,12 @@ class Validator
     {
         $this->success = $success;
     }
+
+    /**
+     * Display success message
+     *
+     * @return null
+     */
     public function success()
     {
         return $this->success;
@@ -100,7 +112,7 @@ class Validator
     /**
      * Return with success message if passed
      *
-     * @param $message
+     * @param string $message = message to display if user passed
      * @return bool
      */
     public function passed($message)

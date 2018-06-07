@@ -1,7 +1,8 @@
 <?php
 namespace formHandlers;
 
-use \API\CallAPI,
+use PlanCare\Services,
+    PlanCare\Customers,
     \errorHandlers\HttpErrors;
 
 session_start();
@@ -46,17 +47,17 @@ include "core/init.php";
             ));
 
             if ($validation->passed("Eigenschappen succesvol aangepast")) {
-                $api = new CallAPI;
+                $service = new Services;
                 $serviceId = $_GET["serviceId"];
 
                 $data = array(
-                    "rest_service_address" => $_POST["rest_service_address"],
-                    "rest_api_key" => $_POST["rest_api_key"],
+                    "serviceAddress" => $_POST["rest_service_address"],
+                    "apiKey" => $_POST["rest_api_key"],
                     "username" => $_POST["username"],
                     "password" => $_POST["password"]
                 );
 
-                if (!$api->updateProperty($serviceId, $data)) {
+                if (!$service->update($serviceId, $data["serviceAddress"], $data["apiKey"], $data["username"], $data["password"])) {
                     echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
                 }
             } else {
@@ -82,13 +83,13 @@ include "core/init.php";
             ]);
 
             if ($validation->passed("Klant succesvol aangemaakt!")) {
-                $api = new CallAPI;
+                $customer = new Customers;
 
                 $data = array(
                     "name" => $_POST["customerName"]
                 );
 
-                $newCustomer = $api->postCustomer($data);
+                $newCustomer = $customer->create($data["name"]);
 
                 if ($newCustomer !== NULL) {
                     if (!array_key_exists("error_code", $newCustomer)) {
@@ -121,9 +122,9 @@ include "core/init.php";
 
     $version = "";
     if(isset($_POST["getVersion"])) {
-        $api = new CallAPI;
-        if(is_string($api->getVersion($_GET["serviceId"]))){
-            $version = $api->getVersion($_GET["serviceId"]);
+        $service = new Services;
+        if(is_string($service->getVersion($_GET["serviceId"]))){
+            $version = $service->getVersion($_GET["serviceId"]);
         } else {
             $version = "";
             echo "<div class='alert alert-danger container' id='hide'>Kon versienummer niet ophalen. Mogelijk is er een fout in de configuratie van de service.</div>";
@@ -140,8 +141,8 @@ include "core/init.php";
 
     <?php
         $serviceId = $_GET["serviceId"];
-        $result = new CallAPI;
-        $service = $result->getService($serviceId);
+        $result = new Services;
+        $service = $result->get($serviceId);
         $httpCheck = new HttpErrors($service["headers"][0]);
         $result = $service["body"];
 

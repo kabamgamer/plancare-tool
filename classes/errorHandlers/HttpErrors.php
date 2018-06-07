@@ -9,6 +9,11 @@ class HttpErrors
             $_http,
             $_message;
 
+    /**
+     * HttpErrors constructor.
+     *
+     * @param $http = HTTP header
+     */
     public function __construct($http)
     {
         $this->_http = $http;
@@ -67,16 +72,31 @@ class HttpErrors
         }
     }
 
-
+    /**
+     * Add an error message
+     *
+     * @param $error = string(message to display)
+     */
     private function addMessage($error)
     {
         $this->_message = $error;
     }
+
+    /**
+     * Returns HTTP error
+     *
+     * @return mixed
+     */
     public function message()
     {
         return $this->_message;
     }
 
+    /**
+     * Check if there are errors
+     *
+     * @return bool
+     */
     public function passed()
     {
         return $this->_passed;

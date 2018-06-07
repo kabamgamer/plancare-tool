@@ -1,8 +1,9 @@
 <?php
 namespace formHandlers;
 
-use \API\CallAPI;
 use errorHandlers\HttpErrors;
+use PlanCare\Customers;
+use PlanCare\Services;
 
 session_start();
 include "core/init.php";
@@ -11,12 +12,13 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
     header("Location: index.php?customerId=0");
 } else {
     if($_GET["customerId"] != 0){
-        $customers = new CallAPI;
-        $customer = $customers->getCustomers($_GET["customerId"]);
+        $customers = new Customers();
+        $customer = $customers->get($_GET["customerId"]);
         $customerStatus = new HttpErrors($customer["headers"][0]);
 
         if ($customerStatus->passed()) {
             $customerName = $customer["body"]["name"];
+
         } else {
             $customerError = "<div class='alert alert-danger'>" . $customerStatus->message() . "</div>";
         }
@@ -47,7 +49,7 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
     /**
      * Validate addServices form
      */
-    if(isset($_POST["submitServicePost"])) {
+    if (isset($_POST["submitServicePost"])) {
         if (Input::exists()) {
             $validate = new Validator;
             $validation = $validate->check($_POST, array(
@@ -60,19 +62,19 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
             ));
 
             if ($validation->passed("Project succesvol aangemaakt")) {
-                $api = new CallAPI;
+                $service = new Services;
 
                 $data = array(
                     "customer" => $_POST["customerId"],
                     "name" => $_POST["serviceName"]
                 );
 
-                $request = $api->postService($data);
+                $request = $service->create($data["name"], $data["customer"]);
 
-                if ($request) {
+                if ($request && !array_key_exists("error_message", $request)) {
                     echo "<div class='alert alert-success container' id='hide'>" . $validation->success() . "</div>";
                 } else {
-                    echo "<div class='alert alert-success container' id='hide'>Er ging iets fout met het aanmaken van een PlanCare service.</div>";
+                    echo "<div class='alert alert-danger container' id='hide'>Deze servicenaam is al in gebruik.</div>";
                 }
             } else {
                 foreach ($validate->errors() as $error) {
@@ -97,13 +99,13 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
             ]);
 
             if ($validation->passed("Klant succesvol aangemaakt!")) {
-                $api = new CallAPI;
+                $customer = new Customers;
 
                 $data = array(
                     "name" => $_POST["customerName"]
                 );
 
-                $newCustomer = $api->postCustomer($data);
+                $newCustomer = $customer->create($data["name"]);
 
                 if ($newCustomer !== NULL) {
                     if (!array_key_exists("error_code", $newCustomer)) {
@@ -194,5 +196,3 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
 <script src="assets/js/customHome.js"></script>
 
 </html>
-
-<?php

@@ -14,6 +14,8 @@ $(document).ready( function () {
         customerId = path.substring(and, index+1);
     }
 
+    console.log(customerId);
+
     $('#services').DataTable({
         processing: true,
         serverSide: true,
@@ -82,7 +84,7 @@ $(document).ready( function () {
  * Form validations
  */
 $(function() {
-    $("#creatCustomer").validate({
+    $("#createCustomer").validate({
         rules: {
             customerName: {
                 required: true

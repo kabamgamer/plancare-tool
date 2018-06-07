@@ -10,7 +10,7 @@
             </div>
             <form method="POST" id="addService" name="addService" action="">
                 <input type="hidden" name="customerId" value="<?= $_GET["customerId"] ?>">
-                <input type="hidden" name="customer" id="customer" value='<?php $api = new API\CallAPI; $customer = $api->getCustomers($_GET["customerId"])["body"]; echo $customer["name"] ?>'>
+                <input type="hidden" name="customer" id="customer" value='<?php $customers = new \PlanCare\Customers(); $customer = $customers->get($_GET["customerId"])["body"]; echo $customer["name"] ?>'>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="type">Type</label>

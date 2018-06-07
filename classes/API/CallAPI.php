@@ -6,8 +6,9 @@ use \Cookie;
 
 class CallAPI
 {
-    private $_DotENV,
-            $_URI;
+    private $_URI,
+            $_DotENV;
+
 
     public function __construct()
     {
@@ -20,11 +21,10 @@ class CallAPI
     /**
      * Get headers
      *
-     * @param $curl
+     * @param $curl = curl_init() from parent method
      */
-    public function headers($curl)
+    private function headers($curl)
     {
-//        $token = $this->authorization()["body"]["token"];
         $token = Cookie::get("accessToken");
 
         $headers   = array();
@@ -36,24 +36,12 @@ class CallAPI
     }
 
     /**
-     * Create token out of refresh token
+     * Set Curl method
      *
-     * @param $curl
-     * @return array|mixed
-     */
-    public function authorization()
-    {
-        $data = array(
-            "refreshToken" => "7mQlzp4s1D5s6Jv1qyBda1JtuS7tXUdKXeMvJ8rgKUnucNmX9XLzMPcSdqDxyg7M"
-        );
-
-        $result = $this->apiCall("POST", "/api/createAuthTokenFromRefreshToken", $data);
-
-        return $result;
-    }
-
-    /**
-     * Check method
+     * @param $curl     = curl_init() from parent method
+     * @param $method   = POST|PUT|GET
+     * @param $url      = Request url. (defined in the .env file)
+     * @param $data     = false|array
      */
     private function method($curl, $method, $url, $data)
     {
@@ -85,11 +73,11 @@ class CallAPI
     /**
      * Method for API calls
      *
-     * @param string $method
-     * @param string $url
+     * @param string $method    = POST|PUT|GET
+     * @param string $url       = Request url (defined in the .env file)
      * @param array $data
      */
-    private function apiCall($method, $url, $data = false)
+    protected function apiCall($method, $url, $data = false)
     {
         $url = ($this->_URI . $url);
 
@@ -127,52 +115,4 @@ class CallAPI
 
         return $result;
     }
-
-
-    /**
-     * Methods for Customers
-     */
-    public function getCustomers($request = null)
-    {
-        return $this->apiCall("GET", "/customers/$request");
-    }
-    public function postCustomer($data)
-    {
-        return $this->apiCall("POST", "/customers", $data);
-    }
-
-    /**
-     * Methods for PlanCare services
-     */
-    public function getServices($request = null)
-    {
-        return $this->apiCall("GET", "/plancareServices/".$request);
-    }
-    public function getService($request)
-    {
-        return $this->apiCall("GET", "/plancareServices/$request");
-    }
-    public function postService($data)
-    {
-        return $this->apiCall("POST", "/plancareServices/forCustomer", $data);
-    }
-
-    /**
-     * Method for updating service properties
-     *
-     * @param int $serviceId
-     */
-    public function updateProperty($serviceId, $data)
-    {
-        return $this->apiCall("PUT", "/plancareServices/$serviceId", $data);
-    }
-
-    public function getVersion($id)
-    {
-        $data = [
-            "method" => "getPlancareversionsPlancareversion"
-        ];
-        return $this->apiCall("POST", "/plancareServices/$id/executeOnConnector", $data);
-    }
-
 }

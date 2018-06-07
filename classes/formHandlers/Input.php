@@ -6,6 +6,11 @@ namespace formHandlers;
 class Input
 {
 
+    /**
+     * @param string $type = POST|GET
+     *
+     * @return bool
+     */
     public static function exists($type = 'post')
     {
         switch ($type){
@@ -21,6 +26,11 @@ class Input
         }
     }
 
+    /**
+     * @param $item = string(input value)
+     *
+     * @return string
+     */
     public static function get($item)
     {
         if(isset($_POST[$item])){

@@ -20,7 +20,7 @@
         </ul>
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <form id="creatCustomer" class="navbar-form" action="" method="post">
+                <form id="createCustomer" class="navbar-form" action="" method="post">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Naam" id="customerName" name="customerName" value="<?= \formHandlers\Input::get("customerName") ?>">
                         <div class="input-group-append">

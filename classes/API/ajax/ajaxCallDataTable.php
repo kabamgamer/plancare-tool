@@ -3,8 +3,8 @@ namespace API\ajax;
 
 require "../../../core/init.php";
 
-use API\CallAPI;
 use \errorHandlers\HttpErrors;
+use PlanCare\Services;
 
 $request = $_REQUEST;
 $col = [
@@ -14,19 +14,20 @@ $col = [
     3 => 'plancare_version'
 ]; //create columns
 
-$api = new CallAPI;
-$responseHeaders = $api->getServices()["headers"];
+$service = new Services;
+$customerId = $_POST["customerId"];
+$responseHeaders = $service->get()["headers"];
 
 // Order data
 $sort = "sort".ucfirst($request['order'][0]['dir']);
-$result = $api->getServices(($_POST['customerId'] == 0 ? "?" : "?projects.customerID=" . $_POST['customerId']) . "&limit=" . $request['length'] . "&offset=".$request['start'] . "&$sort=plancare_services." . $col[$request['order'][0]['column']]);
+$result = $service->get(($customerId == 0 ? "?" : "?projects.customerID=" . $customerId) . "&limit=" . $request['length'] . "&offset=".$request['start'] . "&$sort=plancare_services." . $col[$request['order'][0]['column']]);
 $services = $result["body"];
 $pos = intval(strpos($result['headers'][13],":")) + 1;
 $resultNum = intval(substr($result['headers'][13], $pos));
 
 // Search data
 if(!empty($request['search']['value'])){
-    $result = $api->getServices(($_POST['customerId'] == 0 ? "?" : "?projects.customerID=" . $_POST['customerId']) . "&id,name,plancare_version*=" . $request['search']['value']. "&limit=" . $request['length'] . "&offset=".$request['start'] . "&$sort=plancare_services." . $col[$request['order'][0]['column']]);
+    $result = $service->get(($customerId == 0 ? "?" : "?projects.customerID=" . $customerId) . "&id,name,plancare_version*=" . $request['search']['value']. "&limit=" . $request['length'] . "&offset=".$request['start'] . "&$sort=plancare_services." . $col[$request['order'][0]['column']]);
     $services = $result["body"];
     $pos = intval(strpos($result['headers'][13],":")) + 1;
     $resultNum = intval(substr($result['headers'][13], $pos));
@@ -46,7 +47,7 @@ if($httpCheck->passed()){
         $subdata[] = $service["name"]; // Name
         $subdata[] = $service["project"]; // Project
         $subdata[] = $service["plancare_version"]; // Version
-        $subdata[] = "<a href=\"properties.php?serviceId=".$service['id']."&customerId=" . $_POST["customerId"] . "  \"><button class='next-btn'><span>Eigenschappen </span></button></a>";
+        $subdata[] = "<a href=\"properties.php?serviceId=".$service['id']."&customerId=" . $customerId . "  \"><button class='next-btn'><span>Eigenschappen </span></button></a>";
         $data[] = $subdata;
     }
 } else {
