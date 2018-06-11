@@ -8,7 +8,6 @@ class Customers extends \API\CallAPI
      * Methods to get Customers
      *
      * @param null $request     = Optional: int(id)
-     *
      * @return array|mixed      = Customer data
      */
     public function get($request = null)
@@ -20,7 +19,6 @@ class Customers extends \API\CallAPI
      * Method to create a customer
      *
      * @param $name = string(customerName)
-     *
      * @return array|mixed
      */
     public function create($name)

@@ -20,14 +20,14 @@ $responseHeaders = $service->get()["headers"];
 
 // Order data
 $sort = "sort".ucfirst($request['order'][0]['dir']);
-$result = $service->get(($customerId == 0 ? "?" : "?projects.customerID=" . $customerId) . "&limit=" . $request['length'] . "&offset=".$request['start'] . "&$sort=plancare_services." . $col[$request['order'][0]['column']]);
+$result = $service->get(($customerId == 0 ? "?" : "?projects.customerID=" . $customerId) . "&expand=project&limit=" . $request['length'] . "&offset=".$request['start'] . "&$sort=plancare_services." . $col[$request['order'][0]['column']]);
 $services = $result["body"];
 $pos = intval(strpos($result['headers'][13],":")) + 1;
 $resultNum = intval(substr($result['headers'][13], $pos));
 
 // Search data
 if(!empty($request['search']['value'])){
-    $result = $service->get(($customerId == 0 ? "?" : "?projects.customerID=" . $customerId) . "&id,name,plancare_version*=" . $request['search']['value']. "&limit=" . $request['length'] . "&offset=".$request['start'] . "&$sort=plancare_services." . $col[$request['order'][0]['column']]);
+    $result = $service->get(($customerId == 0 ? "?" : "?projects.customerID=" . $customerId) . "&expand=project&id,name,plancare_version*=" . $request['search']['value']. "&limit=" . $request['length'] . "&offset=".$request['start'] . "&$sort=plancare_services." . $col[$request['order'][0]['column']]);
     $services = $result["body"];
     $pos = intval(strpos($result['headers'][13],":")) + 1;
     $resultNum = intval(substr($result['headers'][13], $pos));
@@ -45,7 +45,7 @@ if($httpCheck->passed()){
         $subdata = array();
         $subdata[] = $service["id"]; // ID
         $subdata[] = $service["name"]; // Name
-        $subdata[] = $service["project"]; // Project
+        $subdata[] = $service["project"]["name"]; // Project
         $subdata[] = $service["plancare_version"]; // Version
         $subdata[] = "<a href=\"properties.php?serviceId=".$service['id']."&customerId=" . $customerId . "  \"><button class='next-btn'><span>Eigenschappen </span></button></a>";
         $data[] = $subdata;

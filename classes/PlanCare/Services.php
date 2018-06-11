@@ -12,7 +12,7 @@ class Services extends \API\CallAPI
      */
     public function get($request = null)
     {
-        return $this->apiCall("GET", "/plancareServices/".$request);
+        return $this->apiCall("GET", "/plancareServices/" . $request);
     }
 
     /**
