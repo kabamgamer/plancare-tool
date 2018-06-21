@@ -17,6 +17,7 @@ $(document).ready( function () {
     console.log(customerId);
 
     $('#services').DataTable({
+        dom: '<"top"f>rt<"bottom"<"entries"il>p><"clear">', //iflp
         processing: true,
         serverSide: true,
         lengthMenu: [
@@ -25,7 +26,7 @@ $(document).ready( function () {
         ],
         language: {
             sLengthMenu: "_MENU_ resultaten weergeven",
-            sProcessing: "PlanCare services ophalen &nbsp<img src=\"http://loadinggif.com/images/image-selection/3.gif\" height='40px'>",
+            sProcessing: "<img src=\"http://loadinggif.com/images/image-selection/3.gif\" height='40px'>&nbsp PlanCare services ophalen",
             sZeroRecords: "Kies eerst een klant.",
             sInfo: "_START_ tot _END_ van _TOTAL_ resultaten",
             sInfoEmpty: "Geen resultaten om weer te geven",

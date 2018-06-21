@@ -31,4 +31,6 @@
             </li>
         </ul>
     </div>
+
+    <a href="logout.php" style="font-size:1.5em"><i class="fas fa-sign-out-alt"></i></a>
 </nav>

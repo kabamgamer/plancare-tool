@@ -194,5 +194,7 @@ if(!isset($_GET["customerId"]) || $_GET["customerId"] == ""){
 <script src="jQuery-Bootstrap-4-Typeahead-Plugin/bootstrap3-typeahead.js"></script>
 <script src="assets/js/jquery.validate.js"></script>
 <script src="assets/js/customHome.js"></script>
+<!-- Font Awesome -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
 
 </html>

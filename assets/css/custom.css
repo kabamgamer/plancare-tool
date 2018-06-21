@@ -135,3 +135,15 @@ form .error:focus{
     background: #fff;
     background: radial-gradient(#fff, rgba(255,255,255,0.8));
 }
+
+/* Datatable styling */
+.entries * {
+    justify-content: left !important;
+}
+.dataTables_length {
+    clear: left;
+}
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: -1.5rem;
+    padding-top: 0 !important;
+}
